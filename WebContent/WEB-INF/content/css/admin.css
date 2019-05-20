@@ -1,0 +1,36 @@
+/*******************头部****************/
+.admin_header{
+	height: 40px;
+	width:100%;
+}
+.verticalline li:after {
+   content: '';
+   position: absolute;
+   width: 1px;
+   height: 14px;
+   background-color: #a4a4a4;
+   top:18px;
+   right: 0;
+  }
+/*******************头部****************/
+
+
+/*******************内容****************/
+.admin_content{
+	margin-top: 12px;
+	min-height: 564px;
+	height: 100%;
+	margin-bottom: -5px;
+	background-color: #E0E0E0;
+}
+/*******************内容****************/
+
+
+/*******************底部****************/
+.admin_footer{
+	line-height: 40px;
+	height: 40px;
+	width:100%;
+	background-color: #080808;
+}
+/*******************底部****************/
