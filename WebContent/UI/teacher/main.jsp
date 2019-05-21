@@ -16,7 +16,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- Bootstrap -->
     <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
     <link href="css/teacher.css" rel="stylesheet">
-
   </head>
   <body>
   	<!--头部-->
@@ -46,6 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <li><a href="#" target="_context">统计成绩</a></li>
 		          </ul>
 		        </li>
+		        <li><a href="#" target="_context">课程管理<span class="sr-only">(current)</span></a></li>
 		        <li><a href="../help.html" target="_context">帮助<span class="sr-only">(current)</span></a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
