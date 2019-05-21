@@ -16,9 +16,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 		<table align="center" border="1" style="margin-top: 120px;">
 			<tr>
+				<td colspan="3">${msg}</td>
+			</tr>
+			<tr>
 				<td>课程ID</td>
 				<td>课程名</td>
-				<td>录入成绩</td>
+				<td>选择</td>
 			</tr>
 			<c:forEach  items="${listcourse}" var="courses">
 				<tr>

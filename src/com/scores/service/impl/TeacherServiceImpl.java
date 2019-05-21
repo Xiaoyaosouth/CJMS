@@ -77,6 +77,21 @@ public class TeacherServiceImpl implements TeacherService {
 		return true;
 	}
 
+	/**
+	 * 根据关键词查询成绩
+	 * @param key
+	 * @return
+	 */
+	@Override
+	public List<Grade> selGradeByKey(String key) {
+		List<Grade> listGrade=teacherMapper.selGradeByCourseKey(key);
+		listGrade.addAll(teacherMapper.selselGradeByStudentKey(key));
+		for (Grade grade : listGrade) {
+			grade.setStudent(teacherMapper.selStudentById(grade.getGrade_student()));
+		}
+		return listGrade;
+	}
+
 	
 
 }
