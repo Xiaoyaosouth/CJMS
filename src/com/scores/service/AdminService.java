@@ -73,4 +73,12 @@ public interface AdminService {
 	 * @author 逍遥
 	 */
 	public String updTeacher(Teacher teacher);
+	
+	/**
+	 * 修改管理员密码
+	 * @param admin 管理员实体
+	 * @param pwd 新密码
+	 * @return
+	 */
+	public Admin updAdminPassword(Admin admin, String pwd);
 }

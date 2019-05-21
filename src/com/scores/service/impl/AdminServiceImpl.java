@@ -170,4 +170,12 @@ public class AdminServiceImpl implements AdminService {
 		return str;
 	}
 
+	@Override
+	public Admin updAdminPassword(Admin admin, String pwd) {
+		if(0 < adminMapper.updAdminPwd(admin.getAdmin_id(), pwd)) {
+			admin.setAdmin_password(pwd);
+		}
+		return admin;
+	}
+
 }

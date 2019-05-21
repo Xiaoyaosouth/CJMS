@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -103,4 +104,14 @@ public interface AdminMapper {
 			+ "teacher_tel=#{teacher_tel}"
 			+ ") where teacher_id=#{teacher_id}")
 	public int updateTeacher(Teacher teacher);
+	
+	/**
+	 * 修改管理员密码
+	 * @param id 管理员ID
+	 * @param pwd 新密码
+	 * @return 成功记录数
+	 * @author 逍遥
+	 */
+	@Update("UPDATE admin SET admin_password=#{pwd} WHERE admin_id = #{admId}")
+	public int updAdminPwd(String admId, String pwd);
 }

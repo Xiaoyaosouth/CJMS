@@ -106,6 +106,11 @@ public class AdminController {
 		return mv;
 	}
 	
+	/**
+	 * 更新学生
+	 * @param student
+	 * @return
+	 */
 	@RequestMapping("updateStudent")
 	public ModelAndView updateStudent(Student student) {
 		ModelAndView mv = new ModelAndView();
@@ -158,6 +163,11 @@ public class AdminController {
 		return mv;
 	}
 	
+	/**
+	 * 更新教师
+	 * @param teacher
+	 * @return
+	 */
 	@RequestMapping("updateTeacher")
 	public ModelAndView updateTeacher(Teacher teacher) {
 		ModelAndView mv = new ModelAndView();
@@ -166,4 +176,35 @@ public class AdminController {
 		mv.setViewName("findAllTeacher");
 		return mv;
 	}
+	
+//	/**
+//	 * 修改管理员密码
+//	 * @param newpwd
+//	 * @param confirmpwd
+//	 * @param session
+//	 * @param mv
+//	 * @return
+//	 */
+//	@RequestMapping("changeAdminPassword")
+//	public ModelAndView changeAdminPwd(String confirmpwd,
+//			HttpSession session,ModelAndView mv){
+//		Admin admin = (Admin)session.get
+//		if(newpwd.equals(null) || newpwd.equals("")) {
+//			mv.addObject("msg", "密码不能为空！");
+//		}else {
+//			if(newpwd.equals(confirmpwd)) { // 如果密码确认无误
+//				admin = adminServiceImpl.updAdminPassword(admin, newpwd); // 得到修改密码后的对象
+//				session.setAttribute("admin", admin);
+//				if(admin.getAdmin_password().equals(newpwd)) { // 检验修改是否正确
+//					mv.addObject("msg", "修改密码成功！");
+//				}else {
+//					mv.addObject("msg", "修改密码失败！");
+//				}
+//			}else {
+//				mv.addObject("msg", "前后密码输入不一致，请重新填写！");
+//			}
+//		}
+//		mv.setViewName("UI/admin/changePassword.jsp");
+//		return mv;
+//	}
 }
