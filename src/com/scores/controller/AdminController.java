@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.scores.pojo.*;
@@ -177,33 +178,21 @@ public class AdminController {
 		return mv;
 	}
 	
-//	/**
-//	 * 修改管理员密码
-//	 * @param newpwd
-//	 * @param confirmpwd
-//	 * @param session
-//	 * @param mv
-//	 * @return
-//	 */
-//	@RequestMapping("changeAdminPassword")
-//	public ModelAndView changeAdminPwd(@PathVariable String admId,String newpwd){
-//		Admin admin = (Admin)session.get
-//		if(newpwd.equals(null) || newpwd.equals("")) {
-//			mv.addObject("msg", "密码不能为空！");
-//		}else {
-//			if(newpwd.equals(confirmpwd)) { // 如果密码确认无误
-//				admin = adminServiceImpl.updAdminPassword(admin, newpwd); // 得到修改密码后的对象
-//				session.setAttribute("admin", admin);
-//				if(admin.getAdmin_password().equals(newpwd)) { // 检验修改是否正确
-//					mv.addObject("msg", "修改密码成功！");
-//				}else {
-//					mv.addObject("msg", "修改密码失败！");
-//				}
-//			}else {
-//				mv.addObject("msg", "前后密码输入不一致，请重新填写！");
-//			}
-//		}
-//		mv.setViewName("UI/admin/changePassword.jsp");
-//		return mv;
-//	}
+	/**
+	 * 修改管理员密码
+	 * @author 逍遥
+	 */
+	@RequestMapping("changeAdminPassword")
+	public ModelAndView changeAdminPwd(@RequestParam(value="admin_id") String admId,
+			@RequestParam(value="newpwd") String newpwd){
+		ModelAndView mv = new ModelAndView();
+		String str = adminServiceImpl.updAdminPassword(admId, newpwd);
+		mv.addObject("msg", str);
+		if (str.equals("Updated admin's password successfully")) {
+			mv.setViewName("index.jsp");
+		}else { // 修改失败
+			mv.setViewName("UI/admin/changePassword.jsp?admId="+admId);
+		}
+		return mv;
+	}
 }

@@ -76,9 +76,15 @@ public interface AdminService {
 	
 	/**
 	 * 修改管理员密码
-	 * @param admin 管理员实体
-	 * @param pwd 新密码
 	 * @return
+	 * @author 逍遥
 	 */
-	public Admin updAdminPassword(Admin admin, String pwd);
+	public String updAdminPassword(String admId, String newpwd);
+	
+	/**
+	 * 根据ID查询管理员
+	 * @param admId 管理员ID
+	 * @return 管理员实体
+	 */
+	public Admin selAdminById(String admId);
 }

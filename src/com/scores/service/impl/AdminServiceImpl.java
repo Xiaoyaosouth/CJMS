@@ -171,11 +171,40 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Admin updAdminPassword(Admin admin, String pwd) {
-		if(0 < adminMapper.updAdminPwd(admin.getAdmin_id(), pwd)) {
-			admin.setAdmin_password(pwd);
+	public String updAdminPassword(String admId, String newpwd) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		String str = null;
+		// 先从数据库查找是否已存在该ID的管理员
+		Admin admin = selAdminById(admId);
+		if (admin == null) {
+			str = "修改密码失败，管理员不存在";
+		}else {
+			if (newpwd !=null && 
+					newpwd.equals(admin.getAdmin_password())) {
+				str = "修改密码失败，新密码与旧密码相同";
+			}else {
+				logger.info("尝试修改管理员密码");
+				admin.setAdmin_password(newpwd);
+				int result = adminMapper.updAdminPwd(admin);
+				if (result > 0) {
+					str = "Updated admin's password successfully";
+				}else {
+					str = "error";
+				}
+			}
 		}
-		return admin;
+		return str;
+	}
+
+	@Override
+	public Admin selAdminById(String admId) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		logger.info("尝试查找ID为"+admId+"的管理员");
+		Admin admin = adminMapper.selAdminById(admId);
+		if (admin != null) {
+			return admin;
+		}
+		return null;
 	}
 
 }

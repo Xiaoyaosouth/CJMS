@@ -107,11 +107,17 @@ public interface AdminMapper {
 	
 	/**
 	 * 修改管理员密码
-	 * @param id 管理员ID
-	 * @param pwd 新密码
 	 * @return 成功记录数
 	 * @author 逍遥
 	 */
-	@Update("UPDATE admin SET admin_password=#{pwd} WHERE admin_id = #{admId}")
-	public int updAdminPwd(String admId, String pwd);
+	@Update("UPDATE admin SET admin_password=#{admin_password} WHERE admin_id=#{admin_id}")
+	public int updAdminPwd(Admin admin);
+	
+	/**
+	 * 根据ID查找管理员
+	 * @param admId 管理员ID
+	 * @return 管理员实体
+	 */
+	@Select("SELECT * FROM admin WHERE admin_id=#{admId}")
+	public Admin selAdminById(String admId);
 }
