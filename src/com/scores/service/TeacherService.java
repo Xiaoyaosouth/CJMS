@@ -9,4 +9,12 @@ public interface TeacherService {
 	 * @return
 	 */
 	Teacher login(Teacher teacher);
+	
+	/**
+	 * 修改教师密码
+	 * @param teacher
+	 * @param newPwd
+	 * @return 修改密码后的教师类
+	 */
+	Teacher updPassword(Teacher teacher,String pwd);
 }

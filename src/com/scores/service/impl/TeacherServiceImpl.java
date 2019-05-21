@@ -22,6 +22,21 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacherMapper.selTeacher(teacher);
 	}
 
+	/**
+	 * 修改教师密码
+	 * @param teacher
+	 * @param newPwd
+	 * @param confirmPwd
+	 * @return 修改密码后的教师类
+	 */
+	@Override
+	public Teacher updPassword(Teacher teacher, String pwd) {
+		if(0<teacherMapper.updTeacherPwd(teacher.getTeacher_id(), pwd)) {
+			teacher.setTeacher_password(pwd);
+		}
+		return teacher;
+	}
+
 	
 
 }
