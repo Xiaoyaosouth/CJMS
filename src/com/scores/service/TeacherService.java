@@ -1,6 +1,12 @@
 package com.scores.service;
 
-import com.scores.pojo.*;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.scores.pojo.Course;
+import com.scores.pojo.Grade;
+import com.scores.pojo.Teacher;
 
 public interface TeacherService {
 	/**
@@ -17,4 +23,42 @@ public interface TeacherService {
 	 * @return 修改密码后的教师类
 	 */
 	Teacher updPassword(Teacher teacher,String pwd);
+	
+	/**
+	 * 查找此教师所有未录入成绩的课程
+	 * @param tid
+	 * @return
+	 */
+	List<Course> selUninsectCourse(String tid);
+	
+	/**
+	 * 查找此课程所有需要录入的成绩条
+	 * @param courseid
+	 * @return
+	 */
+	List<Grade> selGradeByCourse(String courseid);
+	
+	/**
+	 * 批量录入成绩
+	 * @param id
+	 * @param fraction
+	 * @return
+	 */
+	boolean updGradeById(String[] gradeId,String[] fraction);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

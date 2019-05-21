@@ -11,6 +11,7 @@ public class Course {
 	private String course_teacher;//教师
 	private int course_credit;//学分
 	private int course_semester;//学期
+	private boolean is_done;//是否录入完成
 	public String getCourse_id() {
 		return course_id;
 	}
@@ -41,10 +42,17 @@ public class Course {
 	public void setCourse_semester(int course_semester) {
 		this.course_semester = course_semester;
 	}
+	
+	public boolean isIs_done() {
+		return is_done;
+	}
+	public void setIs_done(boolean is_done) {
+		this.is_done = is_done;
+	}
 	@Override
 	public String toString() {
 		return "Course [course_id=" + course_id + ", course_name=" + course_name + ", course_teacher=" + course_teacher
-				+ ", course_credit=" + course_credit + ", course_semester=" + course_semester + "]";
+				+ ", course_credit=" + course_credit + ", course_semester=" + course_semester + ", is_done=" + is_done +"]";
 	}
 	
 	

@@ -1,5 +1,7 @@
 package com.scores.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.scores.pojo.Course;
+import com.scores.pojo.Grade;
 import com.scores.pojo.Teacher;
 import com.scores.service.TeacherService;
 
@@ -53,6 +57,47 @@ public class TeacherController {
 			}
 		}
 		mv.setViewName("UI/teacher/changePassword.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("selcourse")
+	public ModelAndView selCourse(HttpSession session,ModelAndView mv) {
+		Teacher teacher = (Teacher)session.getAttribute("teacher");
+		List<Course> listcourse=teacherServiceImpl.selUninsectCourse(teacher.getTeacher_id());
+		for (Course course : listcourse) {
+			System.out.println(course);
+		}
+		if(null==listcourse) {
+			mv.addObject("msg", "无未录入的课程");
+		}else {
+			mv.addObject("listcourse",listcourse);
+		}
+		mv.setViewName("UI/teacher/selcourse.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("selgrade")
+	public ModelAndView selGrade(String courseid,ModelAndView mv){
+		List<Grade> listGrade=teacherServiceImpl.selGradeByCourse(courseid);
+		if(null!=listGrade) {
+			mv.addObject("listGrade", listGrade);
+		}else {
+			mv.addObject("msg", "无待录入成绩");
+		}
+		mv.setViewName("UI/teacher/allgrade.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("insgrade")
+	public ModelAndView insGrade(String gradeid,String fraction,ModelAndView mv){
+		String[] listGradeId=gradeid.split(",");
+		String[] listFraction=fraction.split(",");
+		if(teacherServiceImpl.updGradeById(listGradeId, listFraction)) {
+			mv.addObject("msg", "录入成功");
+		}else {
+			mv.addObject("msg", "录入失败，请重新录入。");
+		}
+		mv.setViewName("UI/teacher/allgrade.jsp");
 		return mv;
 	}
 	

@@ -1,5 +1,7 @@
 package com.scores.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -35,6 +37,44 @@ public class TeacherServiceImpl implements TeacherService {
 			teacher.setTeacher_password(pwd);
 		}
 		return teacher;
+	}
+
+	/**
+	 * 查找此教师所有未录入成绩的课程
+	 * @param tid
+	 * @return
+	 */
+	@Override
+	public List<Course> selUninsectCourse(String tid) {
+		return teacherMapper.selCourseByTeacher(tid);
+	}
+
+	
+	/**
+	 * 查找此课程所有需要录入的成绩条
+	 * @param courseid
+	 * @return
+	 */
+	@Override
+	public List<Grade> selGradeByCourse(String courseid) {
+		List<Grade> listGrade=teacherMapper.selGradeByCourse(courseid);
+		for (Grade grade : listGrade) {
+			grade.setStudent(teacherMapper.selStudentById(grade.getGrade_student()));
+		}
+		return listGrade;
+	}
+
+	/**
+	 * 批量录入成绩
+	 */
+	@Override
+	public boolean updGradeById(String[] gradeId, String[] fraction) {
+		for(int i=0;i<gradeId.length;i++) {
+			if(0>teacherMapper.updGradeById(gradeId[i], fraction[i])){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	
