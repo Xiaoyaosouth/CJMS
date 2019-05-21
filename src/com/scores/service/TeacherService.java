@@ -45,6 +45,13 @@ public interface TeacherService {
 	 * @return
 	 */
 	boolean updGradeById(String[] gradeId,String[] fraction);
+	
+	/**
+	 * 根据关键词查询成绩
+	 * @param key
+	 * @return
+	 */
+	List<Grade> selGradeByKey(String key);
 }
 
 

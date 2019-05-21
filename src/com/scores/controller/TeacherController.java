@@ -79,10 +79,14 @@ public class TeacherController {
 	@RequestMapping("selgrade")
 	public ModelAndView selGrade(String courseid,ModelAndView mv){
 		List<Grade> listGrade=teacherServiceImpl.selGradeByCourse(courseid);
-		if(null!=listGrade) {
+		if(!listGrade.toString().equals("[]")) {
 			mv.addObject("listGrade", listGrade);
+			System.out.println(listGrade);
 		}else {
+			System.out.println(listGrade);
 			mv.addObject("msg", "无待录入成绩");
+			mv.setViewName("selcourse");
+			return mv;
 		}
 		mv.setViewName("UI/teacher/allgrade.jsp");
 		return mv;
@@ -97,8 +101,22 @@ public class TeacherController {
 		}else {
 			mv.addObject("msg", "录入失败，请重新录入。");
 		}
-		mv.setViewName("UI/teacher/allgrade.jsp");
+		mv.setViewName("selcourse");
 		return mv;
 	}
+	
+	@RequestMapping("searchgrade")
+	public ModelAndView searchGrade(String key,ModelAndView mv){
+		List<Grade> listGrade=teacherServiceImpl.selGradeByKey(key);
+		if(listGrade.toString().equals("[]")) {
+			mv.addObject("msg", "error,请输入学号或课程号");
+		}else {
+			mv.addObject("listGrade", listGrade);
+		}
+		mv.setViewName("UI/teacher/searchgrade.jsp");
+		return mv;
+	}
+	
+	
 	
 }

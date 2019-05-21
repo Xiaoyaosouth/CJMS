@@ -69,5 +69,22 @@ public interface TeacherMapper {
 	public int updGradeById(@Param("gradeid")String gradeid,@Param("fraction")String fraction);
 	
 	
+	/**
+	 * 查找此课程所有的成绩条
+	 * @param tid
+	 * @return
+	 */
+	@Select("select * from grade where grade_course=#{courseid}")
+	public List<Grade> selGradeByCourseKey(@Param("courseid")String courseid);
+	
+	/**
+	 * 查找此学生所有的成绩条
+	 * @param tid
+	 * @return
+	 */
+	@Select("select * from grade where grade_student=#{studentid}")
+	public List<Grade> selselGradeByStudentKey(@Param("studentid")String studentid);
+	
+	
 	
 }
