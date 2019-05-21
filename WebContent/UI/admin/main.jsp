@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#" style="color: #FFF;">学生成绩管理系统</a>
+		      <a class="navbar-brand" href="UI/admin/person.jsp" target="_context" style="color: #FFF;">学生成绩管理系统</a>
 		    </div>
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav verticalline">
@@ -39,9 +39,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户管理<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="#" target="_context">教师管理</a></li>
+		            <li><a href="UI/admin/teacherManage.jsp" target="_context">教师管理</a></li>
 		            <li role="separator" class="divider"></li>
-		            <li><a href="#" target="_context">学生管理</a></li>
+		            <li><a href="findAllStudent" target="_context">学生管理</a></li>
 		          </ul>
 		        </li>
 		        <li class="dropdown">

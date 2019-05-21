@@ -9,4 +9,11 @@ public interface StudentService {
 	 * @return
 	 */
 	Student login(Student student);
+	
+	/**
+	 * 根据学生ID查询学生
+	 * @param stuId
+	 * @return
+	 */
+	public Student selStudentById(String stuId);
 }

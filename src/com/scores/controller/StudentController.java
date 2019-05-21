@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.scores.pojo.*;
 import com.scores.service.*;
@@ -17,7 +18,7 @@ public class StudentController {
 	
 	@RequestMapping("studentLogin")
 	public String login(String userId,String password,HttpSession session){
-		Student student=new Student();
+		Student student = new Student();
 		student.setStudent_id(userId);
 		student.setStudent_password(password);
 		System.out.println(student.toString());
@@ -30,7 +31,6 @@ public class StudentController {
 			System.out.println(studentSession.toString());
 			return "UI/student/main.jsp";
 		}
-			
 	}
 	
 }

@@ -7,5 +7,6 @@
   </head>
   <body>
   <h3>服务器出错啦~</h3>
+  ${msg }
   </body>
 </html>

@@ -22,6 +22,10 @@ public class StudentServiceImpl implements StudentService {
 		return studentMapper.selStudent(student);
 	}
 
-	
-
+	@Override
+	public Student selStudentById(String stuId) {
+		Logger logger=Logger.getLogger(StudentServiceImpl.class);
+		logger.info("尝试由学生ID查找学生");
+		return studentMapper.selStudentById(stuId);
+	}
 }
