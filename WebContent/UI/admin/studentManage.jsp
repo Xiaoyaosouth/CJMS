@@ -47,8 +47,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td>${stuPojo.student_mail }</td>
   			<td>${stuPojo.student_tel }</td>  			
   			<td><!-- 用超链接传值方式把id传给控制层 -->
-			<a href="updateStudent?stuId=${stuPojo.student_id }">修改</a> 
-			<a href="deleteStudent?stuId=${stuPojo.student_id }">删除</a>	
+			<a href="redirectView?id=${stuPojo.student_id }&role=student">修改</a> 
+			<a href="deleteStudent?stuId=${stuPojo.student_id }">删除</a>
 			</td>
    		</tr>
    		</c:forEach> 
