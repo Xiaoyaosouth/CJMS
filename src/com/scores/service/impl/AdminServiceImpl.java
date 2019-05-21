@@ -18,6 +18,9 @@ public class AdminServiceImpl implements AdminService {
 	private AdminMapper adminMapper;
 	
 	@Resource
+	private TeacherMapper teacherMapper;
+	
+	@Resource
 	private StudentMapper studentMapper;
 
 	@Override
@@ -90,6 +93,76 @@ public class AdminServiceImpl implements AdminService {
 			int result = adminMapper.updateStudent(student);
 			if (result > 0) {
 				str = "Updated successfully";
+			}else {
+				str = "error";
+			}
+		}
+		return str;
+	}
+
+	@Override
+	public List<Teacher> getTeacherList() {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		List<Teacher> teaList = adminMapper.findAllTeacher();
+		logger.info("查询教师表，共"+teaList.size()+"条数据");
+		return teaList;
+	}
+
+	@Override
+	public String insTeacher(Teacher teacher) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		// 先从数据库查找是否已存在该ID的教师
+		logger.info("尝试查找ID为"+teacher.getTeacher_id()+"的教师");
+		Teacher tempTeacher = teacherMapper.selTeacherById(teacher.getTeacher_id());
+		if (tempTeacher != null &&
+				tempTeacher.getTeacher_id().equals(teacher.getTeacher_id())) {
+			return "添加失败，已存在相同ID的教师";
+		}else {
+			logger.info("尝试添加教师数据");
+			int result = adminMapper.insertTeacher(teacher);
+			if (result > 0) {
+				return "Added teacher successfully";
+			}else {
+				return "error";
+			}
+		}
+	}
+
+	@Override
+	public String delTeacher(String teaId) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		String str = null;
+		// 先从数据库查找是否已存在该ID的教师
+		logger.info("尝试查找ID为"+teaId+"的教师");
+		Teacher tempTeacher = teacherMapper.selTeacherById(teaId);
+		if (tempTeacher == null) {
+			str = "删除失败，教师不存在";
+		}else {
+			logger.info("尝试删除教师");
+			int result = adminMapper.deleteTeacherById(teaId);
+			if (result > 0) {
+				str = "Deleted teacher successfully";
+			}else {
+				str = "error";
+			}
+		}
+		return str;
+	}
+
+	@Override
+	public String updTeacher(Teacher teacher) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		String str = null;
+		// 先从数据库查找是否已存在该ID的教师
+		logger.info("尝试查找ID为"+teacher.getTeacher_id()+"的教师");
+		Teacher tempTeacher = teacherMapper.selTeacherById(teacher.getTeacher_id());
+		if (tempTeacher == null) {
+			str = "修改失败，教师不存在";
+		}else {
+			logger.info("尝试修改教师数据");
+			int result = adminMapper.updateTeacher(teacher);
+			if (result > 0) {
+				str = "Updated teacher successfully";
 			}else {
 				str = "error";
 			}

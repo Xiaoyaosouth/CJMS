@@ -15,37 +15,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
   <a href="findAllStudent">返回学生列表</a><br>
 	<form method="post" action="updateStudent">
-		<table>
-			<tr>
-				<td>学号</td>
-				<td><input type="text" name="student_id" value="04160908" required/></td>
-			</tr>
-			<tr>
-				<td>姓名</td>
-				<td><input type="text" name="student_name" value="逍遥" required/></td>
-			</tr>
-			<tr>
-				<td>密码</td>
-				<td><input type="text" name="student_password" value="123456" required/></td>
-			</tr>
-			<tr>
-				<td>班级</td>
-				<td><input type="text" name="student_department" value="041609" required/></td>
-			</tr>
-			<tr>
-				<td>性别</td>
-				<td><input type="text" name="student_gender" value="1" required/></td>
-			</tr>
-			<tr>
-				<td>邮箱</td>
-				<td><input type="text" name="student_mail" value="626753724@qq.com" required/></td>
-			</tr>
-			<tr>
-				<td>手机号</td>
-				<td><input type="text" name="student_tel" value="13750002413" required/></td>
-			</tr>
-		</table>
-		<input type="submit" value="添加" />&nbsp;<input type="reset" value="重填" /><br>
+	  <table>
+		<tr>
+		  <th>项目名称</th>
+		  <th>修改前</th>
+   		  <th>修改后</th>
+   		</tr>
+   		<tr>
+   		  <td>学号</td>
+   		  <td><input type="text" value="${stuPojo.student_id }" readonly/></td>
+   		  <td><input type="text" name="student_id" value="${stuPojo.student_id }" readonly/></td>
+   		</tr>
+   		<tr>
+   		  <td>姓名</td>
+   		  <td><input type="text" value="${stuPojo.student_name }" readonly/></td>
+   		  <td><input type="text" name="student_name" value="${stuPojo.student_name }" required/></td>
+   		</tr>
+   		<tr>
+   		  <td>密码</td>
+   		  <td><input type="text" value="${stuPojo.student_password }" readonly/></td>
+   		  <td><input type="text" name="student_password" value="${stuPojo.student_password }" required/></td>
+   		</tr>
+   		<tr>
+   		  <td>班级</td>
+   		  <td><input type="text" value="${stuPojo.student_department }" readonly/></td>
+   		  <td><input type="text" name="student_department" value="${stuPojo.student_department }" required/></td>
+   		</tr>
+   		<tr>
+   		  <td>性别</td>
+   		  <td>
+   		    <c:choose>
+	   		  <c:when test="${stuPojo.student_gender == 1 }">男</c:when>
+	   		  <c:when test="${stuPojo.student_gender == 2 }">女</c:when>
+	   		  <c:otherwise>???</c:otherwise>
+	   		</c:choose>
+	   	  </td>
+   		  <td><input type="text" name="student_gender" required/>
+	   	  </td>
+   		</tr>
+   		<tr>
+   		  <td>邮箱</td>
+   		  <td><input type="text" value="${stuPojo.student_mail }" readonly/></td>
+   		  <td><input type="text" name="student_mail" value="${stuPojo.student_mail }"/></td>
+   		</tr>
+   		<tr>
+   		  <td>手机号</td>
+   		  <td><input type="text" value="${stuPojo.student_tel }" readonly/></td>
+   		  <td><input type="text" name="student_tel" value="${stuPojo.student_tel }" required/></td>
+   		</tr>
+	  </table>
+		<input type="submit" value="修改" />
 	</form>
 </body>
 </html>

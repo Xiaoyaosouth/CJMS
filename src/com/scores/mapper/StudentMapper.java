@@ -13,6 +13,7 @@ public interface StudentMapper {
 	 * 根据学生ID查询学生
 	 * @param stuId
 	 * @return
+	 * @author 逍遥
 	 */
 	@Select("select * from student where student_id=#{stuId}")
 	public Student selStudentById(String stuId);

@@ -47,7 +47,7 @@ public interface AdminMapper {
 	
 	/**
 	 * 更新学生数据（要注意处理传入的ID不能为空）
-	 * @param student
+	 * @param student 学生实体
 	 * @return 成功记录数
 	 * @author 逍遥
 	 */
@@ -65,6 +65,42 @@ public interface AdminMapper {
 	 * @author 逍遥
 	 */
 	@Select("select * from teacher")
-	public List<Student> findAllTeacher();
+	public List<Teacher> findAllTeacher();
 	
+	/**
+	 * 插入教师数据
+	 * @param teacher 教师实体
+	 * @return 成功记录数
+	 * @author 逍遥
+	 */
+	@Insert("insert into teacher("
+			+ "teacher_id,teacher_name,teacher_password,teacher_gender,teacher_mail,teacher_tel"
+			+ ") values("
+			+ "#{teacher_id},#{teacher_name},#{teacher_password},"
+			+ "#{teacher_gender},#{teacher_mail},#{teacher_tel}"
+			+ ")")
+	public int insertTeacher(Teacher teacher);
+	
+	
+	/**
+	 * 根据ID删除教师
+	 * @param teaId 教师ID
+	 * @return 成功记录数
+	 * @author 逍遥
+	 */
+	@Delete("delete from teacher where teacher_id = #{teaId}")
+	public int deleteTeacherById(String teaId);
+	
+	/**
+	 * 更新教师数据（要注意处理传入的ID不能为空）
+	 * @param teacher 教师实体
+	 * @return 成功记录数
+	 * @author 逍遥
+	 */
+	@Update("update teacher set("
+			+ "teacher_name=#{teacher_name},teacher_password=#{teacher_password},"
+			+ "teacher_gender=#{teacher_gender},teacher_mail=#{teacher_mail},"
+			+ "teacher_tel=#{teacher_tel}"
+			+ ") where teacher_id=#{teacher_id}")
+	public int updateTeacher(Teacher teacher);
 }
