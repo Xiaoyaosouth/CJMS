@@ -39,9 +39,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户管理<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="UI/admin/teacherManage.jsp" target="_context">教师管理</a></li>
+		            <li><a href="findAllTeacher" target="_context">教师管理</a></li>
 		            <li role="separator" class="divider"></li>
 		            <li><a href="findAllStudent" target="_context">学生管理</a></li>
+		          </ul>
+		        </li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">课程管理<span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="findAllCourse" target="_context">查询课程</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="UI/admin/addCourse.jsp" target="_context">添加课程</a></li>
+		            <li role="separator" class="divider"></li>
 		          </ul>
 		        </li>
 		        <li class="dropdown">

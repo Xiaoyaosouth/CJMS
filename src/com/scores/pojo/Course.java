@@ -6,16 +6,16 @@ package com.scores.pojo;
  *
  */
 public class Course {
-	private String course_id;//课程编号
+	private int course_id;//课程编号
 	private String course_name;//课程名
 	private String course_teacher;//教师
 	private int course_credit;//学分
 	private int course_semester;//学期
 	private boolean is_done;//是否录入完成
-	public String getCourse_id() {
+	public int getCourse_id() {
 		return course_id;
 	}
-	public void setCourse_id(String course_id) {
+	public void setCourse_id(int course_id) {
 		this.course_id = course_id;
 	}
 	public String getCourse_name() {

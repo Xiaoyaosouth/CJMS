@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr align="center">
 				<td colspan="2">
-					<a href="UI/admin/changePassword.jsp" target="_context">修改密码</a>
+					<a href="UI/admin/changePassword.jsp?admId=${admin.admin_id}" target="_context">修改密码</a>
 				</td>
 			</tr>
 		</table>

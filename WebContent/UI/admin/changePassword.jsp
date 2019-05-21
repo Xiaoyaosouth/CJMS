@@ -16,6 +16,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form action="changeAdminPassword" method="post">
 			<table align="center" border="1" style="margin-top: 120px;">
 				<tr>
+					<td>账号</td>
+					<td><input type="text" name="admin_id" value="${admId }" readonly></td>
+				</tr>
+				<tr>
 					<td>新密码：</td>
 					<td><input type="password" name="newpwd"></td>
 				</tr>
@@ -23,15 +27,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>确认密码：</td>
 					<td><input type="password" name="confirmpwd"></td>
 				</tr>
-				
 				<tr align="center">
 					<td colspan="2">
-						<input type="submit" value="确认">
-					</td>
-				</tr>
-				<tr align="center">
-					<td colspan="2">
-						<span>${msg}</span>
+						<input type="submit" value="确认修改">
 					</td>
 				</tr>
 			</table>

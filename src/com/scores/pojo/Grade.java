@@ -7,7 +7,7 @@ package com.scores.pojo;
  */
 public class Grade {
 	private String grade_id;//成绩编号
-	private String grade_course;//课程编号
+	private int grade_course;//课程编号
 	private String grade_student;//学号
 	private int grade_fraction;//分数
 	private int grade_semester;//学期
@@ -18,10 +18,10 @@ public class Grade {
 	public void setGrade_id(String grade_id) {
 		this.grade_id = grade_id;
 	}
-	public String getGrade_course() {
+	public int getGrade_course() {
 		return grade_course;
 	}
-	public void setGrade_course(String grade_course) {
+	public void setGrade_course(int grade_course) {
 		this.grade_course = grade_course;
 	}
 	public String getGrade_student() {

@@ -186,8 +186,7 @@ public class AdminController {
 //	 * @return
 //	 */
 //	@RequestMapping("changeAdminPassword")
-//	public ModelAndView changeAdminPwd(String confirmpwd,
-//			HttpSession session,ModelAndView mv){
+//	public ModelAndView changeAdminPwd(@PathVariable String admId,String newpwd){
 //		Admin admin = (Admin)session.get
 //		if(newpwd.equals(null) || newpwd.equals("")) {
 //			mv.addObject("msg", "密码不能为空！");
