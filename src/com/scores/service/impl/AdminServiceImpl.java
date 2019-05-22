@@ -16,12 +16,6 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Resource
 	private AdminMapper adminMapper;
-	
-	@Resource
-	private TeacherMapper teacherMapper;
-	
-	@Resource
-	private StudentMapper studentMapper;
 
 	@Override
 	public Admin login(Admin admin) {
@@ -43,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		// 先从数据库查找是否已存在该ID的学生
 		logger.info("尝试查找ID为"+student.getStudent_id()+"的学生");
-		Student tempStudent = studentMapper.selStudentById(student.getStudent_id());
+		Student tempStudent = selStudentById(student.getStudent_id());
 		if (tempStudent != null &&
 				tempStudent.getStudent_id().equals(student.getStudent_id())) {
 			return "添加失败，已存在相同ID的学生";
@@ -64,7 +58,7 @@ public class AdminServiceImpl implements AdminService {
 		String str = null;
 		// 先从数据库查找是否已存在该ID的学生
 		logger.info("尝试查找ID为"+stuId+"的学生");
-		Student tempStudent = studentMapper.selStudentById(stuId);
+		Student tempStudent = selStudentById(stuId);
 		if (tempStudent == null) {
 			str = "删除失败，学生不存在";
 		}else {
@@ -85,7 +79,7 @@ public class AdminServiceImpl implements AdminService {
 		String str = null;
 		// 先从数据库查找是否已存在该ID的学生
 		logger.info("尝试查找ID为"+student.getStudent_id()+"的学生");
-		Student tempStudent = studentMapper.selStudentById(student.getStudent_id());
+		Student tempStudent = selStudentById(student.getStudent_id());
 		if (tempStudent == null) {
 			str = "修改失败，学生不存在";
 		}else {
@@ -113,7 +107,7 @@ public class AdminServiceImpl implements AdminService {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		// 先从数据库查找是否已存在该ID的教师
 		logger.info("尝试查找ID为"+teacher.getTeacher_id()+"的教师");
-		Teacher tempTeacher = teacherMapper.selTeacherById(teacher.getTeacher_id());
+		Teacher tempTeacher = selTeacherById(teacher.getTeacher_id());
 		if (tempTeacher != null &&
 				tempTeacher.getTeacher_id().equals(teacher.getTeacher_id())) {
 			return "添加失败，已存在相同ID的教师";
@@ -134,7 +128,7 @@ public class AdminServiceImpl implements AdminService {
 		String str = null;
 		// 先从数据库查找是否已存在该ID的教师
 		logger.info("尝试查找ID为"+teaId+"的教师");
-		Teacher tempTeacher = teacherMapper.selTeacherById(teaId);
+		Teacher tempTeacher = selTeacherById(teaId);
 		if (tempTeacher == null) {
 			str = "删除失败，教师不存在";
 		}else {
@@ -155,7 +149,7 @@ public class AdminServiceImpl implements AdminService {
 		String str = null;
 		// 先从数据库查找是否已存在该ID的教师
 		logger.info("尝试查找ID为"+teacher.getTeacher_id()+"的教师");
-		Teacher tempTeacher = teacherMapper.selTeacherById(teacher.getTeacher_id());
+		Teacher tempTeacher = selTeacherById(teacher.getTeacher_id());
 		if (tempTeacher == null) {
 			str = "修改失败，教师不存在";
 		}else {
@@ -205,6 +199,137 @@ public class AdminServiceImpl implements AdminService {
 			return admin;
 		}
 		return null;
+	}
+
+	@Override
+	public List<String> selAllSemester() {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		logger.info("尝试查询所有学期");
+		List<String> semesterList = adminMapper.selAllSemester();
+		if (semesterList != null) {
+			return semesterList;
+		}
+		return null;
+	}
+
+	@Override
+	public List<Course> selCourseBySemester(String semester) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		logger.info("尝试查询学期为"+semester+"的课程");
+		List<Course> courseList = adminMapper.selCourseBySemester(semester);
+		if (courseList != null) {
+			return courseList;
+		}
+		return null;
+	}
+
+	@Override
+	public String insCourse(Course course) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		String str = null;
+		// 先从数据库查找是否已存在该ID的课程
+		int courseId = course.getCourse_id();
+		if (courseId != 0) {
+			logger.info("尝试查找ID为"+courseId+"的课程");
+			Course tempCourse = selCourseById(String.valueOf(courseId));
+			if (tempCourse != null &&
+					tempCourse.getCourse_id() == courseId) {
+				str = "添加失败，已存在相同ID的课程";
+			}else {
+				logger.info("尝试添加课程数据");
+				int result = adminMapper.insertCourse(course);
+				if (result > 0) {
+					str = "Added course successfully";
+				}else {
+					str = "error";
+				}
+			}
+		}
+		return str;
+	}
+
+	@Override
+	public List<Course> selAllCourse() {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		logger.info("尝试查询所有课程");
+		List<Course> courseList = adminMapper.selAllCourse();
+		if (courseList != null) {
+			return courseList;
+		}
+		return null;
+	}
+
+	@Override
+	public String delCourse(String courseId) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		String str = null;
+		// 先从数据库查找是否已存在该ID的课程
+		logger.info("尝试查找ID为"+courseId+"的课程");
+		Course tempCourse = selCourseById(courseId);
+		if (tempCourse == null) {
+			str = "删除失败，课程不存在";
+		}else {
+			logger.info("尝试删除课程");
+			int result = adminMapper.deleteCourseById(courseId);
+			if (result > 0) {
+				str = "Deleted course successfully";
+			}else {
+				str = "error";
+			}
+		}
+		return str;
+	}
+
+	@Override
+	public String updCourse(Course course) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		String str = null;
+		String courseId = null;
+		// 先从数据库查找是否已存在该ID的课程
+		courseId = String.valueOf(course.getCourse_id());
+		logger.info("尝试查找ID为"+courseId+"的课程");
+		Course tempCourse = selCourseById(courseId);
+		if (tempCourse == null) {
+			str = "修改失败，课程不存在";
+		}else {
+			logger.info("尝试修改课程数据");
+			int result = adminMapper.updateCourse(course);
+			if (result > 0) {
+				str = "Updated course successfully";
+			}else {
+				str = "error";
+			}
+		}
+		return str;
+	}
+
+	@Override
+	public Course selCourseById(String courseId) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		logger.info("尝试查找ID为"+courseId+"的课程");
+		Course course = adminMapper.selCourseById(courseId);
+		if (course != null) {
+			return course;
+		}
+		return null;
+	}
+
+	@Override
+	public Teacher selTeacherById(String teaId) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		logger.info("尝试查找ID为"+teaId+"的教师");
+		Teacher teacher = adminMapper.selTeacherById(teaId);
+		if (teacher != null) {
+			return teacher;
+		}
+		return null;
+	}
+	
+	@Override
+	public Student selStudentById(String stuId) {
+		Logger logger=Logger.getLogger(StudentServiceImpl.class);
+		logger.info("尝试由学生ID查找学生");
+		return adminMapper.selStudentById(stuId);
 	}
 
 }

@@ -2,9 +2,7 @@ package com.scores.service;
 
 import java.util.*;
 
-import com.scores.pojo.Admin;
-import com.scores.pojo.Student;
-import com.scores.pojo.Teacher;
+import com.scores.pojo.*;
 
 public interface AdminService {
 	/**
@@ -87,4 +85,68 @@ public interface AdminService {
 	 * @return 管理员实体
 	 */
 	public Admin selAdminById(String admId);
+	
+	/**
+	 * 列出所有学期
+	 * @return
+	 */
+	public List<String> selAllSemester();
+	
+	/**
+	 * 根据学期查询课程
+	 * @param semester 学期
+	 * @return list
+	 */
+	public List<Course> selCourseBySemester(String semester);
+	
+	/**
+	 * 添加课程
+	 * @param course 课程实体
+	 * @return 
+	 * @author 逍遥
+	 */
+	public String insCourse(Course course);
+	
+	/**
+	 * 查询所有课程，按学期降序
+	 * @return list
+	 */
+	public List<Course> selAllCourse();
+	
+	/**
+	 * 根据ID删除课程
+	 * @param courseId 课程ID
+	 * @return
+	 * @author 逍遥
+	 */
+	public String delCourse(String courseId);
+	
+	/**
+	 * 更新课程数据
+	 * @param course 课程实体
+	 * @return
+	 * @author 逍遥
+	 */
+	public String updCourse(Course course);
+	
+	/**
+	 * 根据ID查询课程
+	 * @param courseId 课程ID
+	 * @return 课程实体
+	 */
+	public Course selCourseById(String courseId);
+	
+	/**
+	 * 根据ID查询教师
+	 * @param teaId 教师ID
+	 * @return 教师实体
+	 */
+	public Teacher selTeacherById(String teaId);
+	
+	/**
+	 * 根据ID查询学生
+	 * @param stuId 学生ID
+	 * @return 学生实体
+	 */
+	public Student selStudentById(String stuId);
 }

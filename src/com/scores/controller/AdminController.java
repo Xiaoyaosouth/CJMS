@@ -6,9 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.scores.pojo.*;
@@ -19,9 +17,6 @@ public class AdminController {
 	
 	@Resource
 	private AdminService adminServiceImpl;
-	
-	@Resource
-	private StudentService studentServiceImpl;
 	
 	@RequestMapping("adminLogin")
 	public String login(String userId,String password,HttpSession session){
@@ -84,9 +79,9 @@ public class AdminController {
 	}
 	
 	/**
-	 * 跳转到某页面，用于删除或修改前输入实体数据
+	 * 跳转到某页面，用于删除或修改前获得实体数据
 	 * @param id 实体ID
-	 * @param role 角色，student为学生，teacher为教师
+	 * @param role 角色，student为学生，teacher为教师，semester为课程
 	 * @return
 	 * @author 逍遥
 	 */
@@ -94,12 +89,20 @@ public class AdminController {
 	public ModelAndView rediectView(String id, String role) {
 		ModelAndView mv = new ModelAndView();
 		switch (role) {
-		case "student":
-			Student student = studentServiceImpl.selStudentById(id);
+		case "student": // 修改学生
+			Student student = adminServiceImpl.selStudentById(id);
 			mv.addObject("stuPojo", student);
 			mv.setViewName("UI/admin/updateStudent.jsp");
 			break;
-		case "teacher":
+		case "teacher": // 修改教师
+			Teacher teacher = adminServiceImpl.selTeacherById(id);
+			mv.addObject("teaPojo", teacher);
+			mv.setViewName("UI/admin/updateTeacher.jsp");
+			break;
+		case "course": // 修改课程
+			Course course = adminServiceImpl.selCourseById(id);
+			mv.addObject("coursePojo", course);
+			mv.setViewName("UI/admin/updateCourse.jsp");
 			break;
 		default:
 			break;
@@ -158,7 +161,7 @@ public class AdminController {
 	@RequestMapping("deleteTeacher")
 	public ModelAndView deleteTeacher(String teaId) {
 		ModelAndView mv = new ModelAndView();
-		String str = adminServiceImpl.delStudent(teaId);
+		String str = adminServiceImpl.delTeacher(teaId);
 		mv.addObject("msg", str);
 		mv.setViewName("findAllTeacher");
 		return mv;
@@ -193,6 +196,105 @@ public class AdminController {
 		}else { // 修改失败
 			mv.setViewName("UI/admin/changePassword.jsp?admId="+admId);
 		}
+		return mv;
+	}
+	
+	/**
+	 * 查询课程（按学期来查，要传入semester参数）
+	 * @author 逍遥
+	 */
+	@RequestMapping("findAllCourse")
+	public ModelAndView findAllCourse(@RequestParam(value="semester") String semester){
+		ModelAndView mv = new ModelAndView();
+		List<String> semesterList = null;
+		List<Course> courseList = null;
+		semesterList = adminServiceImpl.selAllSemester();
+		if (semesterList != null) {
+			mv.addObject("semesterList", semesterList);
+		}
+		if (semester != null &&
+				!semester.equals("null")) {
+			// 按学期查课程
+			courseList = adminServiceImpl.selCourseBySemester(semester);
+		}else {
+			// 显示所有课程
+			courseList = adminServiceImpl.selAllCourse();
+		}
+		mv.addObject("courseList", courseList);
+		mv.setViewName("UI/admin/courseManage.jsp");
+		return mv;
+	}
+	
+	/**
+	 * 尝试添加课程
+	 * @return
+	 * @author 逍遥
+	 */
+	@RequestMapping("tryAddCourse")
+	public ModelAndView tryAddCourse() {
+		ModelAndView mv = new ModelAndView();
+		List<Course>courseList = adminServiceImpl.selAllCourse();
+		if (courseList != null) {
+			mv.addObject("courseListSize", courseList.size());
+		}else {
+			mv.addObject("courseListSize", 0);
+		}
+		mv.setViewName("UI/admin/addCourse.jsp");
+		return mv;
+	}
+	
+	/**
+	 * 添加课程
+	 * @param course
+	 * @return
+	 * @author 逍遥
+	 */
+	@RequestMapping("addCourse")
+	public ModelAndView addCourse(Course course) {
+		ModelAndView mv = new ModelAndView();
+		String str = adminServiceImpl.insCourse(course);
+		if (str.equals("添加失败，已存在相同ID的课程")) {
+			List<Course>courseList = adminServiceImpl.selAllCourse();
+			if (courseList != null) {
+				mv.addObject("courseListSize", courseList.size());
+			}else {
+				mv.addObject("courseListSize", 0);
+			}
+			str = new String(str+"【系统建议ID为"+courseList.size()+"】");
+			mv.setViewName("UI/admin/addCourse.jsp");
+		}else {
+			mv.setViewName("findAllCourse?semester=null");
+		}
+		mv.addObject("msg", str);
+		return mv;
+	}
+	
+	/**
+	 * 删除课程
+	 * @param courseId 课程ID
+	 * @return
+	 * @author 逍遥
+	 */
+	@RequestMapping("deleteCourse")
+	public ModelAndView deleteCourse(String courseId) {
+		ModelAndView mv = new ModelAndView();
+		String str = adminServiceImpl.delCourse(courseId);
+		mv.addObject("msg", str);
+		mv.setViewName("findAllCourse?semester=null");
+		return mv;
+	}
+	
+	/**
+	 * 更新课程
+	 * @param course
+	 * @return
+	 */
+	@RequestMapping("updateCourse")
+	public ModelAndView updateCourse(Course course) {
+		ModelAndView mv = new ModelAndView();
+		String str = adminServiceImpl.updCourse(course);
+		mv.addObject("msg", str);
+		mv.setViewName("findAllCourse?semester=null");
 		return mv;
 	}
 }

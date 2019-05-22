@@ -24,6 +24,15 @@ public interface AdminMapper {
 	public List<Student> findAllStudent();
 	
 	/**
+	 * 根据ID查询学生
+	 * @param stuId 学生ID
+	 * @return 学生实体
+	 * @author 逍遥
+	 */
+	@Select("SELECT * FROM student WHERE student_id=#{stuId}")
+	public Student selStudentById(String stuId);
+	
+	/**
 	 * 插入学生数据
 	 * @param student 学生实体
 	 * @return 成功记录数
@@ -61,6 +70,15 @@ public interface AdminMapper {
 	public int updateStudent(Student student);
 	
 	/**
+	 * 根据ID查询教师
+	 * @param teaId 教师ID
+	 * @return 教师实体
+	 * @author 逍遥
+	 */
+	@Select("SELECT * FROM teacher WHERE teacher_id=#{teaId}")
+	public Teacher selTeacherById(String teaId);
+	
+	/**
 	 * 查询教师表
 	 * @return list对象
 	 * @author 逍遥
@@ -82,7 +100,6 @@ public interface AdminMapper {
 			+ ")")
 	public int insertTeacher(Teacher teacher);
 	
-	
 	/**
 	 * 根据ID删除教师
 	 * @param teaId 教师ID
@@ -98,11 +115,11 @@ public interface AdminMapper {
 	 * @return 成功记录数
 	 * @author 逍遥
 	 */
-	@Update("update teacher set("
+	@Update("UPDATE teacher SET "
 			+ "teacher_name=#{teacher_name},teacher_password=#{teacher_password},"
 			+ "teacher_gender=#{teacher_gender},teacher_mail=#{teacher_mail},"
 			+ "teacher_tel=#{teacher_tel}"
-			+ ") where teacher_id=#{teacher_id}")
+			+ " WHERE teacher_id=#{teacher_id}")
 	public int updateTeacher(Teacher teacher);
 	
 	/**
@@ -120,4 +137,69 @@ public interface AdminMapper {
 	 */
 	@Select("SELECT * FROM admin WHERE admin_id=#{admId}")
 	public Admin selAdminById(String admId);
+	
+	/**
+	 * 查询课程表中的所有学期，按学期降序（从大到小）
+	 * @return 
+	 */
+	@Select("SELECT DISTINCT course_semester FROM course ORDER BY course_semester DESC")
+	public List<String> selAllSemester();
+	
+	/**
+	 * 根据学期查询课程
+	 * @param semester 学期
+	 * @return list
+	 */
+	@Select("SELECT * FROM course WHERE course_semester=#{semester}")
+	public List<Course> selCourseBySemester(String semester);
+	
+	/**
+	 * 插入课程数据
+	 * @param course 课程实体
+	 * @return 成功记录数
+	 */
+	@Insert("INSERT INTO course("
+			+ "course_id,course_name,course_teacher,course_credit,course_semester"
+			+ ") VALUES("
+			+ "#{course_id},#{course_name},#{course_teacher},"
+			+ "#{course_credit},#{course_semester}"
+			+ ")")
+	public int insertCourse(Course course);
+	
+	/**
+	 * 根据ID查询课程
+	 * @param courseId 课程ID
+	 * @return 课程实体
+	 * @author 逍遥
+	 */
+	@Select("SELECT * FROM course WHERE course_id=#{courseId}")
+	public Course selCourseById(String courseId);
+	
+	/**
+	 * 查询所有课程，按学期降序
+	 * @return
+	 */
+	@Select("SELECT * FROM course ORDER BY course_semester DESC")
+	public List<Course> selAllCourse();
+	
+	/**
+	 * 根据ID删除课程
+	 * @param courseId 课程ID
+	 * @return 成功记录数
+	 * @author 逍遥
+	 */
+	@Delete("DELETE FROM course where course_id = #{courseId}")
+	public int deleteCourseById(String courseId);
+	
+	/**
+	 * 更新课程数据（要注意处理传入的ID不能为空）
+	 * @param course 课程实体
+	 * @return 成功记录数
+	 * @author 逍遥
+	 */
+	@Update("UPDATE course SET "
+			+ "course_name=#{course_name},course_credit=#{course_credit},"
+			+ "course_semester=#{course_semester},is_done=#{is_done}"
+			+ " WHERE course_id=#{course_id}")
+	public int updateCourse(Course course);
 }
