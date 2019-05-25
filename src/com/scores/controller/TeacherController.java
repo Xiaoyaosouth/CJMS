@@ -36,6 +36,18 @@ public class TeacherController {
 			return "UI/teacher/main.jsp";
 		}
 	}
+	@RequestMapping("logout")
+	public String logout(HttpSession session){
+		if(session!=null) {
+			session.removeAttribute("teacher");
+			session.removeAttribute("admin");
+			session.removeAttribute("student");
+			session.invalidate();
+		}
+		return "index.jsp";
+	}
+	
+	
 	
 	@RequestMapping("changeteacherpwd")
 	public ModelAndView changeTeacherPwd(String newpwd,String confirmpwd,
