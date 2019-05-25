@@ -117,6 +117,49 @@ public class TeacherController {
 		return mv;
 	}
 	
+	/**
+	 * 学生统计控制方法
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping("stustatistics")
+	public ModelAndView stuStatistics(String id,ModelAndView mv) {
+		String[] str=teacherServiceImpl.selStuStatistics(id);
+		String avg=str[0];//平均成绩
+		String avgpot=str[1];//平均绩点
+		String cridit=str[2];//已修学分
+		String courseNum=str[3];//已修课程
+		String fileNum=str[4];//挂科数
+		
+		mv.addObject("avg", avg);
+		mv.addObject("avgpot", avgpot);
+		mv.addObject("cridit", cridit);
+		mv.addObject("courseNum", courseNum);
+		mv.addObject("fileNum", fileNum);
+		
+		mv.setViewName("UI/teacher/stuStatistics.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("coursestatistics")
+	public ModelAndView courseStatistics(String id,ModelAndView mv) {
+		String[] str=teacherServiceImpl.selCourseStatistics(id);
+		String stuNum=str[0];
+		String avg=str[1];
+		String max=str[2];
+		String min=str[3];
+		String goodNum=str[4];
+		String failNum=str[5];
+		mv.addObject("stuNum", stuNum);
+		mv.addObject("avg", avg);
+		mv.addObject("max", max);
+		mv.addObject("min", min);
+		mv.addObject("goodNum", goodNum);
+		mv.addObject("failNum", failNum);
+		mv.setViewName("UI/teacher/courseStatistics.jsp");
+		return mv;
+	}
+	
 	
 	
 }

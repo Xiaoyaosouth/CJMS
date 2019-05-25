@@ -93,5 +93,44 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	
+	@Override
+	public String[] selStuStatistics(String stuId) {
+		float avg=0;//平均成绩
+		float avgpot=0;//平均绩点
+		int cridit=0;//已修学分
+		int courseNum=0;//已修课程
+		int fileNum=0;//挂科数
+		avg=teacherMapper.selAvg(stuId);
+		if(avg>60) {
+			avgpot=(avg/10)-5;
+		}
+		cridit=teacherMapper.selCredit(stuId);
+		courseNum=teacherMapper.selCourse(stuId);
+		fileNum=teacherMapper.selFail(stuId);
+		String [] str=new String[] {""+avg,""+avgpot,""+cridit,""+courseNum,""+fileNum};
+		return str;
+	}
+
+	@Override
+	public String[] selCourseStatistics(String courseId) {
+		/* <td>课程总人数：平均成绩：最高分：最低分：优秀数：挂科数：*/
+		int stuNum=0;
+		float avg=0;
+		int max=0;
+		int min=0;
+		int goodNum=0;
+		int failNum=0;
+		stuNum=teacherMapper.selStuNum(courseId);
+		avg=teacherMapper.selCourseAvg(courseId);
+		max=teacherMapper.selCourseMax(courseId);
+		min=teacherMapper.selCourseMin(courseId);
+		goodNum=teacherMapper.selCourseGoodNum(courseId);
+		failNum=teacherMapper.selCourseFailNum(courseId);
+		String [] str=new String[] {""+stuNum,""+avg,""+max,
+				""+min,""+goodNum,""+failNum};
+		return str;
+	}
+
+	
 
 }

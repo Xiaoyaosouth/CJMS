@@ -52,6 +52,20 @@ public interface TeacherService {
 	 * @return
 	 */
 	List<Grade> selGradeByKey(String key);
+	
+	/**
+	 * 根据学生id搜索成绩统计信息
+	 * @param stuId
+	 * @return
+	 */
+	String[] selStuStatistics(String stuId);
+	
+	/**
+	 * 根据课程id搜索成绩统计信息
+	 * @param stuId
+	 * @return
+	 */
+	String[] selCourseStatistics(String CourseId);
 }
 
 
