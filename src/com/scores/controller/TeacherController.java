@@ -117,8 +117,20 @@ public class TeacherController {
 		return mv;
 	}
 	
-	@RequestMapping("searchgrade")
-	public ModelAndView searchGrade(String key,ModelAndView mv){
+	@RequestMapping("searchstugrade")
+	public ModelAndView searchStuGrade(String key,ModelAndView mv){
+		List<Grade> listGrade=teacherServiceImpl.selGradeByKey(key);
+		if(listGrade.toString().equals("[]")) {
+			mv.addObject("msg", "error,请输入学号或课程号");
+		}else {
+			mv.addObject("listGrade", listGrade);
+		}
+		mv.setViewName("UI/teacher/searchgrade.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("searchcoursegrade")
+	public ModelAndView searchCourseGrade(String key,ModelAndView mv){
 		List<Grade> listGrade=teacherServiceImpl.selGradeByKey(key);
 		if(listGrade.toString().equals("[]")) {
 			mv.addObject("msg", "error,请输入学号或课程号");

@@ -9,42 +9,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>个人信息</title>
+		<title>学生成绩信息</title>
 		<base href="<%=basePath%>">
 	</head>
 	<body>
-		<form action="" method="post" id="myform">
-			<table align="center" border="1" style="margin-top: 120px;">
-				<tr>
-					<td>
-						<input type="text" name="key"/>
-					</td>
-					<td>
-						<input type="submit" name="搜索"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="radio" name="selRadio" value="0" checked="checked"/>
-						按课程号搜
-					</td>
-					<td>
-						<input type="radio" name="selRadio" value="1" />
-						按学号搜
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						${msg}
-					</td>
-				</tr>
-			</table>
-		</form>
-		
 		<table align="center" border="1" style="margin-top: 120px;">
 			<tr>
 				<td>学号</td>
 				<td>姓名</td>
+				<td>课程号</td>
+				<td>课程</td>
+				<td>教师姓名</td>
 				<td>成绩</td>
 			</tr>
 			<c:forEach  items="${listGrade}" var="grades">

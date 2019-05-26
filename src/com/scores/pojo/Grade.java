@@ -12,6 +12,7 @@ public class Grade {
 	private int grade_fraction;//分数
 	private int grade_semester;//学期
 	private Student student;//学生
+	private Course course;//课程
 	public String getGrade_id() {
 		return grade_id;
 	}
@@ -49,11 +50,19 @@ public class Grade {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+	public Course getCourse() {
+		return course;
+	}
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 	@Override
 	public String toString() {
 		return "Grade [grade_id=" + grade_id + ", grade_course=" + grade_course + ", grade_student=" + grade_student
-				+ ", grade_fraction=" + grade_fraction + ", grade_semester=" + grade_semester +", student=" + student + "]";
+				+ ", grade_fraction=" + grade_fraction + ", grade_semester=" + grade_semester + ", student=" + student
+				+ ", course=" + course + "]";
 	}
+	
 	
 	
 }

@@ -12,6 +12,7 @@ public class Course {
 	private int course_credit;//学分
 	private int course_semester;//学期
 	private boolean is_done;//是否录入完成
+	private Teacher teacher;//教师
 	public int getCourse_id() {
 		return course_id;
 	}
@@ -49,11 +50,19 @@ public class Course {
 	public void setIs_done(boolean is_done) {
 		this.is_done = is_done;
 	}
+	public Teacher getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 	@Override
 	public String toString() {
 		return "Course [course_id=" + course_id + ", course_name=" + course_name + ", course_teacher=" + course_teacher
-				+ ", course_credit=" + course_credit + ", course_semester=" + course_semester + ", is_done=" + is_done +"]";
+				+ ", course_credit=" + course_credit + ", course_semester=" + course_semester + ", is_done=" + is_done
+				+ ", teacher=" + teacher + "]";
 	}
+	
 	
 	
 }
