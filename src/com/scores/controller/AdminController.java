@@ -2,9 +2,10 @@ package com.scores.controller;
 
 import java.util.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import javax.annotation.*;
+import javax.servlet.http.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,34 +19,47 @@ public class AdminController {
 	@Resource
 	private AdminService adminServiceImpl;
 	
+    @Autowired
+    private HttpServletRequest request;
+	
+    /**
+     * 管理员登录
+     * @param userId
+     * @param password
+     * @return
+     */
 	@RequestMapping("adminLogin")
-	public String login(String userId,String password,HttpSession session){
-		Admin admin=new Admin();
+	public ModelAndView adminLogin(String userId,String password){
+		ModelAndView mv = new ModelAndView();
+		Admin admin = new Admin();
 		admin.setAdmin_id(userId);
 		admin.setAdmin_password(password);
-		System.out.println(admin.toString());
-		Admin adminSession=adminServiceImpl.login(admin);
-		
-		if(adminSession==null){
-			return "UI/error.jsp";
+		admin = adminServiceImpl.login(admin);
+		if(admin == null){
+			request.setAttribute("msg", "登录失败，Admin实体不存在");
+			mv.setViewName("UI/error.jsp");
+			return mv;
 		}else{
-			session.setAttribute("admin", adminSession);
-			System.out.println(adminSession.toString());
-			return "UI/admin/main.jsp";
+			HttpSession session = request.getSession();
+			session.setAttribute("admin", admin);
+			System.out.println(admin.toString());
+			mv.setViewName("UI/admin/main.jsp");
+			return mv;
 		}
 	}
 	
 	/**
 	 * 查询学生列表
-	 * @param request
 	 * @return
 	 * @author 逍遥
 	 */
 	@RequestMapping("findAllStudent")
-	public String getStudentList(javax.servlet.http.HttpServletRequest request){
+	public ModelAndView getStudentList(){
+		ModelAndView mv = new ModelAndView();
 		List<Student> stuList = adminServiceImpl.getStudentList();
 		request.setAttribute("stuList", stuList);
-		return "UI/admin/studentManage.jsp";
+		mv.setViewName("UI/admin/studentManage.jsp");
+		return mv;
 	}
 	
 	/**
@@ -191,11 +205,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		String str = adminServiceImpl.updAdminPassword(admId, newpwd);
 		mv.addObject("msg", str);
-		if (str.equals("Updated admin's password successfully")) {
-			mv.setViewName("index.jsp");
-		}else { // 修改失败
-			mv.setViewName("UI/admin/changePassword.jsp?admId="+admId);
-		}
+		mv.setViewName("UI/admin/changePassword.jsp?admId="+admId);
 		return mv;
 	}
 	

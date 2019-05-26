@@ -181,7 +181,7 @@ public class AdminServiceImpl implements AdminService {
 				admin.setAdmin_password(newpwd);
 				int result = adminMapper.updAdminPwd(admin);
 				if (result > 0) {
-					str = "Updated admin's password successfully";
+					str = "Updated password successfully";
 				}else {
 					str = "error";
 				}
