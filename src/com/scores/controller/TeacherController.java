@@ -20,6 +20,13 @@ public class TeacherController {
 	@Resource
 	private TeacherService teacherServiceImpl;
 	
+	/**
+	 * 教师登录
+	 * @param userId
+	 * @param password
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("teacherLogin")
 	public String login(String userId,String password,HttpSession session){
 		Teacher teacher = new Teacher();
@@ -36,6 +43,11 @@ public class TeacherController {
 			return "UI/teacher/main.jsp";
 		}
 	}
+	/**
+	 * 退出登录
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("logout")
 	public String logout(HttpSession session){
 		if(session!=null) {
@@ -48,7 +60,14 @@ public class TeacherController {
 	}
 	
 	
-	
+	/**
+	 * 修改教师密码
+	 * @param newpwd
+	 * @param confirmpwd
+	 * @param session
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("changeteacherpwd")
 	public ModelAndView changeTeacherPwd(String newpwd,String confirmpwd,
 			HttpSession session,ModelAndView mv){
@@ -72,6 +91,12 @@ public class TeacherController {
 		return mv;
 	}
 	
+	/**
+	 * 根据教师搜索待录入成绩的课程
+	 * @param session
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("selcourse")
 	public ModelAndView selCourse(HttpSession session,ModelAndView mv) {
 		Teacher teacher = (Teacher)session.getAttribute("teacher");
@@ -88,6 +113,12 @@ public class TeacherController {
 		return mv;
 	}
 	
+	/**
+	 * 根据课程搜索待录入成绩
+	 * @param courseid
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("selgrade")
 	public ModelAndView selGrade(String courseid,ModelAndView mv){
 		List<Grade> listGrade=teacherServiceImpl.selGradeByCourse(courseid);
@@ -104,6 +135,13 @@ public class TeacherController {
 		return mv;
 	}
 	
+	/**
+	 * 录入成绩
+	 * @param gradeid
+	 * @param fraction
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("insgrade")
 	public ModelAndView insGrade(String gradeid,String fraction,ModelAndView mv){
 		String[] listGradeId=gradeid.split(",");
@@ -116,33 +154,71 @@ public class TeacherController {
 		mv.setViewName("selcourse");
 		return mv;
 	}
-	
+	/**
+	 * 根据关键词搜索学生成绩信息
+	 * @param key
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("searchstugrade")
 	public ModelAndView searchStuGrade(String key,ModelAndView mv){
-		List<Grade> listGrade=teacherServiceImpl.selGradeByKey(key);
+		List<Grade> listGrade=teacherServiceImpl.selGradeByStu(key);
+		
+		String[] str=teacherServiceImpl.selStuStatistics(key);
+		String avg=str[0];//平均成绩
+		String avgpot=str[1];//平均绩点
+		String cridit=str[2];//已修学分
+		String courseNum=str[3];//已修课程
+		String fileNum=str[4];//挂科数
+		mv.addObject("avg", avg);
+		mv.addObject("avgpot", avgpot);
+		mv.addObject("cridit", cridit);
+		mv.addObject("courseNum", courseNum);
+		mv.addObject("fileNum", fileNum);//统计信息
+		
 		if(listGrade.toString().equals("[]")) {
-			mv.addObject("msg", "error,请输入学号或课程号");
+			mv.addObject("msg", "error,请输入学号");
 		}else {
 			mv.addObject("listGrade", listGrade);
 		}
-		mv.setViewName("UI/teacher/searchgrade.jsp");
-		return mv;
-	}
-	
-	@RequestMapping("searchcoursegrade")
-	public ModelAndView searchCourseGrade(String key,ModelAndView mv){
-		List<Grade> listGrade=teacherServiceImpl.selGradeByKey(key);
-		if(listGrade.toString().equals("[]")) {
-			mv.addObject("msg", "error,请输入学号或课程号");
-		}else {
-			mv.addObject("listGrade", listGrade);
-		}
-		mv.setViewName("UI/teacher/searchgrade.jsp");
+		mv.setViewName("UI/teacher/stugrade.jsp");
 		return mv;
 	}
 	
 	/**
-	 * 学生统计控制方法
+	 * 根据关键词搜索课程成绩信息
+	 * @param key
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping("searchcoursegrade")
+	public ModelAndView searchCourseGrade(String key,ModelAndView mv){
+		List<Grade> listGrade=teacherServiceImpl.selGradeLogByCourse(key);
+		String[] str=teacherServiceImpl.selCourseStatistics(key);
+		String stuNum=str[0];
+		String avg=str[1];
+		String max=str[2];
+		String min=str[3];
+		String goodNum=str[4];
+		String failNum=str[5];
+		mv.addObject("stuNum", stuNum);
+		mv.addObject("avg", avg);
+		mv.addObject("max", max);
+		mv.addObject("min", min);
+		mv.addObject("goodNum", goodNum);
+		mv.addObject("failNum", failNum);//统计信息
+		
+		if(listGrade.toString().equals("[]")) {
+			mv.addObject("msg", "error,请输入课程号");
+		}else {
+			mv.addObject("listGrade", listGrade);
+		}
+		mv.setViewName("UI/teacher/coursegrade.jsp");
+		return mv;
+	}
+	
+	/**
+	 * 学生统计控制信息
 	 * @param mv
 	 * @return
 	 */
@@ -165,6 +241,12 @@ public class TeacherController {
 		return mv;
 	}
 	
+	/**
+	 * 课程成绩统计信息
+	 * @param id
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("coursestatistics")
 	public ModelAndView courseStatistics(String id,ModelAndView mv) {
 		String[] str=teacherServiceImpl.selCourseStatistics(id);

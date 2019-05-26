@@ -78,16 +78,35 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	/**
-	 * 根据关键词查询成绩
+	 * 根据学号查询成绩
 	 * @param key
 	 * @return
 	 */
 	@Override
-	public List<Grade> selGradeByKey(String key) {
-		List<Grade> listGrade=teacherMapper.selGradeByCourseKey(key);
-		listGrade.addAll(teacherMapper.selselGradeByStudentKey(key));
+	public List<Grade> selGradeByStu(String stuId) {
+		List<Grade> listGrade=teacherMapper.selselGradeByStudentKey(stuId);
 		for (Grade grade : listGrade) {
 			grade.setStudent(teacherMapper.selStudentById(grade.getGrade_student()));
+			Course course=teacherMapper.selCourseById(grade.getGrade_course());
+			course.setTeacher(teacherMapper.selTeacherById(course.getCourse_teacher()));
+			grade.setCourse(course);
+		}
+		return listGrade;
+	}
+	
+	/**
+	 * 根据课程号查询成绩
+	 * @param key
+	 * @return
+	 */
+	@Override
+	public List<Grade> selGradeLogByCourse(String courseId) {
+		List<Grade> listGrade=teacherMapper.selGradeByCourseKey(courseId);
+		for (Grade grade : listGrade) {
+			grade.setStudent(teacherMapper.selStudentById(grade.getGrade_student()));
+			Course course=teacherMapper.selCourseById(grade.getGrade_course());
+			course.setTeacher(teacherMapper.selTeacherById(course.getCourse_teacher()));
+			grade.setCourse(course);
 		}
 		return listGrade;
 	}

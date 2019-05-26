@@ -103,24 +103,27 @@ public interface TeacherMapper {
 	
 	//==============课程统计================//
 	/* <td>课程总人数：平均成绩：最高分：最低分：优秀数：挂科数：*/
-	@Select("SELECT COUNT(*) FROM grade WHERE grade_course=2")
+	@Select("SELECT COUNT(*) FROM grade WHERE grade_course=#{courseId}")
 	public int selStuNum(@Param("courseId")String courseId);
 	
-	@Select("SELECT avg(grade_fraction) FROM grade WHERE grade_course=2")
+	@Select("SELECT avg(grade_fraction) FROM grade WHERE grade_course=#{courseId}")
 	public float selCourseAvg(@Param("courseId")String courseId);
 	
-	@Select("SELECT max(grade_fraction) FROM grade WHERE grade_course=2")
+	@Select("SELECT max(grade_fraction) FROM grade WHERE grade_course=#{courseId}")
 	public int selCourseMax(@Param("courseId")String courseId);
 	
-	@Select("SELECT min(grade_fraction) FROM grade WHERE grade_course=2")
+	@Select("SELECT min(grade_fraction) FROM grade WHERE grade_course=#{courseId}")
 	public int selCourseMin(@Param("courseId")String courseId);
 	
-	@Select("SELECT COUNT(*) FROM grade WHERE grade_course=2 AND grade_fraction>=80")
+	@Select("SELECT COUNT(*) FROM grade WHERE grade_course=#{courseId} AND grade_fraction>=80")
 	public int selCourseGoodNum(@Param("courseId")String courseId);
 	
-	@Select("SELECT COUNT(*) FROM grade WHERE grade_course=2 AND grade_fraction<60")
+	@Select("SELECT COUNT(*) FROM grade WHERE grade_course=#{courseId} AND grade_fraction<60")
 	public int selCourseFailNum(@Param("courseId")String courseId);
 	//==============课程统计================//
+
+	@Select("SELECT * FROM course WHERE course_id=#{id}")
+	public Course selCourseById(@Param("id")int id);
 	
 	
 }

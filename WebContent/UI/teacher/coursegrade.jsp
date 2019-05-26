@@ -9,24 +9,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>学生成绩信息</title>
+		<title>课程所有学生成绩信息</title>
 		<base href="<%=basePath%>">
 	</head>
 	<body>
 		<table align="center" border="1" style="margin-top: 100px;">
 			<tr>
-				<td>平均成绩</td>
-				<td>平均绩点</td>
-				<td>已修学分</td>
-				<td>已修课程</td>
-				<td>挂科数</td>
+				<td>课程总人数：</td>
+				<td>平均成绩：</td>
+				<td>最高分：</td>
+				<td>最低分：</td>
+				<td>优秀数：</td>
+				<td>挂科数：</td>
 			</tr>
 			<tr>
+				<td>${stuNum}</td>
 				<td>${avg}</td>
-				<td>${avgpot}</td>
-				<td>${cridit}</td>
-				<td>${courseNum}</td>
-				<td>${fileNum}</td>
+				<td>${max}</td>
+				<td>${min}</td>
+				<td>${goodNum}</td>
+				<td>${failNum}</td>
 			</tr>
 		</table>
 		<table align="center" border="1" style="margin-top: 20px;">
@@ -36,7 +38,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>课程号</td>
 				<td>课程</td>
 				<td>教师姓名</td>
-				<td>学分</td>
 				<td>成绩</td>
 			</tr>
 			<c:forEach  items="${listGrade}" var="grades">
@@ -46,7 +47,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${grades.grade_course}</td>
 					<td>${grades.course.course_name}</td>
 					<td>${grades.course.teacher.teacher_name}</td>
-					<td>${grades.course.course_credit}</td>
 					<td>${grades.grade_fraction}</td>
 				</tr>
 			</c:forEach>

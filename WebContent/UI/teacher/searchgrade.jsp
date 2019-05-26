@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>个人信息</title>
+		<title>按key搜索成绩信息</title>
 		<base href="<%=basePath%>">
 	</head>
 	<body>
@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="text" name="key"/>
 					</td>
 					<td>
-						<input type="submit" name="搜索"/>
+						<input type="button" value="搜索" onclick="submitForm()"/>
 					</td>
 				</tr>
 				<tr>
@@ -40,22 +40,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 			</table>
 		</form>
-		
-		<table align="center" border="1" style="margin-top: 120px;">
-			<tr>
-				<td>学号</td>
-				<td>姓名</td>
-				<td>成绩</td>
-			</tr>
-			<c:forEach  items="${listGrade}" var="grades">
-				<tr>
-					<td>${grades.grade_student}</td>
-					<td>${grades.student.student_name}</td>
-					<td>${grades.grade_fraction}</td>
-				</tr>
-			</c:forEach>
-		</table>
-		
 	</body>
 	<!-- 用JS由radio值来更改表单action -->
 	<script type="text/javascript">     
@@ -72,9 +56,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             }
             if(selectValue == 0){
-            	form.action = "searchstugrade";
-            }else if(selectValue == 1){
             	form.action = "searchcoursegrade";
+            }else if(selectValue == 1){
+            	form.action = "searchstugrade";
             }
             form.submit(); // 提交表单
         }  

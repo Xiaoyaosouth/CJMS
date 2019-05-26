@@ -47,11 +47,17 @@ public interface TeacherService {
 	boolean updGradeById(String[] gradeId,String[] fraction);
 	
 	/**
-	 * 根据关键词查询成绩
+	 * 根据学号查询成绩
 	 * @param key
 	 * @return
 	 */
-	List<Grade> selGradeByKey(String key);
+	List<Grade> selGradeByStu(String stuId);
+	/**
+	 * 根据课程号查询成绩
+	 * @param key
+	 * @return
+	 */
+	List<Grade> selGradeLogByCourse(String courseId);
 	
 	/**
 	 * 根据学生id搜索成绩统计信息

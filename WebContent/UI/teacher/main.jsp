@@ -41,8 +41,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <li><a href="selcourse" target="_context">录入成绩</a></li>
 		            <li role="separator" class="divider"></li>
 		            <li><a href="UI/teacher/searchgrade.jsp" target="_context">查询成绩</a></li>
-		            <li role="separator" class="divider"></li>
-		            <li><a href="UI/teacher/searchStatistics.jsp" target="_context">统计成绩</a></li>
 		          </ul>
 		        </li>
 		        <li><a href="#" target="_context">课程管理<span class="sr-only">(current)</span></a></li>
