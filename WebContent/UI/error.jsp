@@ -7,6 +7,8 @@
   </head>
   <body>
   <h3>服务器出错啦~</h3>
-  ${msg }
+  <h4>错误信息：${msg }</h4>
+  ps.看不懂就找系统管理员。<br><br>
+  <a href="index.jsp">返回</a>
   </body>
 </html>
