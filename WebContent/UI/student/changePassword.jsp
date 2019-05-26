@@ -9,11 +9,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>修改教师密码</title>
+		<title>修改学生密码</title>
 		<base href="<%=basePath%>">
 	</head>
 	<body>
-		<form action="changeteacherpwd" method="post">
+		<form action="changestupwd" method="post">
 			<table align="center" border="1" style="margin-top: 120px;">
 				<tr>
 					<td>新密码：</td>

@@ -36,14 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav verticalline">
 		        <li ><a href="UI/student/person.jsp" target="_context">个人信息<span class="sr-only">(current)</span></a></li>
-		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">成绩管理<span class="caret"></span></a>
-		          <ul class="dropdown-menu">
-		            <li><a href="#" target="_context">查询成绩</a></li>
-		            <li role="separator" class="divider"></li>
-		          </ul>
-		        </li>
-		        <li><a href="../help.html" target="_context">帮助<span class="sr-only">(current)</span></a></li>
+		        <li ><a href="searchstugrade?key=${student.student_id}" target="_context">查询成绩<span class="sr-only">(current)</span></a></li>
+		        <li><a href="UI/help.jsp" target="_context">帮助<span class="sr-only">(current)</span></a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="logout" target="_top">退出系统</a></li>

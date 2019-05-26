@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>个人信息</title>
+		<title>学生个人信息</title>
 		<base href="<%=basePath%>">
 	</head>
 	<body>
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr align="center">
 				<td colspan="2">
-					<a >修改密码</a>
+					<a href="UI/student/changePassword.jsp" target="_context">修改密码</a>
 				</td>
 			</tr>
 		</table>

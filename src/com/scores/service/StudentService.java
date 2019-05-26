@@ -16,4 +16,12 @@ public interface StudentService {
 	 * @return
 	 */
 	public Student selStudentById(String stuId);
+
+	/**
+	 * 更新密码
+	 * @param student
+	 * @param newpwd
+	 * @return
+	 */
+	Student updPassword(Student student, String newpwd);
 }

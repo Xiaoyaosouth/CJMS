@@ -28,4 +28,13 @@ public class StudentServiceImpl implements StudentService {
 		logger.info("尝试由学生ID查找学生");
 		return studentMapper.selStudentById(stuId);
 	}
+
+	
+	@Override
+	public Student updPassword(Student student, String pwd) {
+		if(0<studentMapper.updStudentPwd(student.getStudent_id(), pwd)) {
+			student.setStudent_password(pwd);
+		}
+		return student;
+	}
 }
