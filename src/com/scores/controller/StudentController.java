@@ -51,24 +51,14 @@ public class StudentController {
 	public ModelAndView changeTeacherPwd(String newpwd,String confirmpwd,
 			HttpSession session,ModelAndView mv){
 		Student student = (Student)session.getAttribute("student");
-		if(newpwd.equals(null)||newpwd.equals("")) {
-			mv.addObject("msg", "密码不能为空！");
+		String msg=studentServiceImpl.updPassword(student,newpwd,confirmpwd);
+		if(msg.contains("请重新登录")) {
+			mv.addObject("msg", msg);
+			mv.setViewName("logout");
 		}else {
-			if(newpwd.equals(confirmpwd)) {
-				student=studentServiceImpl.updPassword(student, newpwd);
-				session.setAttribute("student", student);
-				if(student.getStudent_password().equals(newpwd)){
-					mv.addObject("msg", "修改成功！");
-					mv.setViewName("logout");
-				}else {
-					mv.addObject("msg", "修改失败！");
-					mv.setViewName("UI/student/changePassword.jsp");
-				}
-			}else {
-				mv.addObject("msg", "前后密码输入不一致，请重新填写！");
-				mv.setViewName("UI/student/changePassword.jsp");
-			}
-		}
+			mv.addObject("msg", msg);
+			mv.setViewName("UI/student/changePassword.jsp");
+		}	
 		return mv;
 	}
 }

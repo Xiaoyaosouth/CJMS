@@ -1,8 +1,11 @@
 package com.scores.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.scores.pojo.Course;
 import com.scores.pojo.Grade;
+import com.scores.pojo.Student;
 import com.scores.pojo.Teacher;
 import com.scores.service.TeacherService;
 
@@ -49,14 +53,23 @@ public class TeacherController {
 	 * @return
 	 */
 	@RequestMapping("logout")
-	public String logout(HttpSession session){
+	public ModelAndView logout(HttpServletResponse response,HttpSession session,ModelAndView mv){
 		if(session!=null) {
 			session.removeAttribute("teacher");
 			session.removeAttribute("admin");
 			session.removeAttribute("student");
 			session.invalidate();
 		}
-		return "index.jsp";
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			System.err.println("PrintWriter out 错误");
+			e.printStackTrace();
+		}
+		out.print("<script> window.top.location.replace('http://localhost:8080/CJMS/index.jsp');</script>");
+		out.flush();
+		return null;
 	}
 	
 	
@@ -72,22 +85,14 @@ public class TeacherController {
 	public ModelAndView changeTeacherPwd(String newpwd,String confirmpwd,
 			HttpSession session,ModelAndView mv){
 		Teacher teacher = (Teacher)session.getAttribute("teacher");
-		if(newpwd.equals(null)||newpwd.equals("")) {
-			mv.addObject("msg", "密码不能为空！");
+		String msg=teacherServiceImpl.updPassword(teacher,newpwd,confirmpwd);
+		if(msg.contains("请重新登录")) {
+			mv.addObject("msg", msg);
+			mv.setViewName("logout");
 		}else {
-			if(newpwd.equals(confirmpwd)) {
-				teacher=teacherServiceImpl.updPassword(teacher, newpwd);
-				session.setAttribute("teacher", teacher);
-				if(teacher.getTeacher_password().equals(newpwd)) {
-					mv.addObject("msg", "修改成功！");
-				}else {
-					mv.addObject("msg", "修改失败！");
-				}
-			}else {
-				mv.addObject("msg", "前后密码输入不一致，请重新填写！");
-			}
+			mv.addObject("msg", msg);
+			mv.setViewName("UI/teacher/changePassword.jsp");
 		}
-		mv.setViewName("UI/teacher/changePassword.jsp");
 		return mv;
 	}
 	

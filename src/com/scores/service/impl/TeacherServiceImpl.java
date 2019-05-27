@@ -32,11 +32,26 @@ public class TeacherServiceImpl implements TeacherService {
 	 * @return 修改密码后的教师类
 	 */
 	@Override
-	public Teacher updPassword(Teacher teacher, String pwd) {
-		if(0<teacherMapper.updTeacherPwd(teacher.getTeacher_id(), pwd)) {
-			teacher.setTeacher_password(pwd);
+	public String updPassword(Teacher teacher, String newpwd, String confirmpwd) {
+		if(newpwd.equals(null)||newpwd.equals("")) {
+			return "密码不能为空！";
 		}
-		return teacher;
+		if(!newpwd.equals(confirmpwd)) {
+			return "前后密码不一致，请重新填写！";
+		}
+		
+		int i=0;
+		try {
+			i=teacherMapper.updTeacherPwd(teacher.getTeacher_id(), newpwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "会话已超时，请重新登录！";
+		}
+		if(i>0) {
+			return "密码修改成功，请重新登录！";
+		}else {
+			return "会话已超时，请重新登录！";
+		}
 	}
 
 	/**

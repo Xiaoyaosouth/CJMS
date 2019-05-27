@@ -1,5 +1,7 @@
 package com.scores.service;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.scores.pojo.*;
 
 public interface StudentService {
@@ -22,6 +24,7 @@ public interface StudentService {
 	 * @param student
 	 * @param newpwd
 	 * @return
+	 * @throws Exception 
 	 */
-	Student updPassword(Student student, String newpwd);
+	String updPassword(Student student, String newpwd,String confirmpwd);
 }

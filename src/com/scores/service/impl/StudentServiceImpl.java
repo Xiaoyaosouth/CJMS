@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.scores.mapper.*;
 import com.scores.pojo.*;
@@ -29,12 +30,30 @@ public class StudentServiceImpl implements StudentService {
 		return studentMapper.selStudentById(stuId);
 	}
 
-	
 	@Override
-	public Student updPassword(Student student, String pwd) {
-		if(0<studentMapper.updStudentPwd(student.getStudent_id(), pwd)) {
-			student.setStudent_password(pwd);
+	public String updPassword(Student student, String newpwd, String confirmpwd){
+		if(newpwd.equals(null)||newpwd.equals("")) {
+			return "密码不能为空！";
 		}
-		return student;
+		if(!newpwd.equals(confirmpwd)) {
+			return "前后密码不一致，请重新填写！";
+		}
+		
+		int i=0;
+		try {
+			i=studentMapper.updStudentPwd(student.getStudent_id(), newpwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "会话已超时，请重新登录！";
+		}
+		if(i>0) {
+			return "密码修改成功，请重新登录！";
+		}else {
+			return "会话已超时，请重新登录！";
+		}
+		
 	}
+
+	
+	
 }

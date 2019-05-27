@@ -22,7 +22,7 @@ public interface TeacherService {
 	 * @param newPwd
 	 * @return 修改密码后的教师类
 	 */
-	Teacher updPassword(Teacher teacher,String pwd);
+	String updPassword(Teacher teacher,String pwd,String confirmpwd);
 	
 	/**
 	 * 查找此教师所有未录入成绩的课程
