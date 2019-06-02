@@ -35,11 +35,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td>学期</td>
-				<td><input type="text" name="course_semester" value="20192"
-				           placeholder="格式：如20192,前4位表示学年,第5位表示学期" required/></td>
+				<td>
+				  <input type="text" name="course_semester" value="20192"
+				         placeholder="格式：如20192,前4位表示学年,第5位表示学期" required/>
+				</td>
 			</tr>
 		</table>
-		<input type="submit" value="确认添加" />&nbsp;&nbsp;<input type="reset" value="重填" /><br>
+		<input type="submit" value="添加" />&nbsp;&nbsp;<input type="reset" value="重填" /><br>
 	</form>
 </body>
 </html>

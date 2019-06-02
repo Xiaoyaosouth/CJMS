@@ -39,16 +39,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<tr>
    		  <td>学分</td>
    		  <td><input type="text" value="${coursePojo.course_credit }" readonly/></td>
-   		  <td><input type="text" name="course_credit" value="${coursePojo.course_credit }" />
+   		  <td><input type="text" name="course_credit" value="${coursePojo.course_credit }" required/>
 	   	  </td>
    		</tr>
    		<tr>
    		  <td>学期</td>
    		  <td><input type="text" value="${coursePojo.course_semester }" readonly/></td>
-   		  <td><input type="text" name="course_semester" value="${coursePojo.course_semester }"/></td>
+   		  <td><input type="text" name="course_semester" value="${coursePojo.course_semester }" required/></td>
    		</tr>
    		<tr>
-   		  <td>是否已经录入完成</td>
+   		  <td>?成绩录入完成?</td>
    		  <td><input type="text" value="${coursePojo.is_done }" readonly/></td>
    		  <td><input type="text" name="is_done" value="${coursePojo.is_done }" required/></td>
    		</tr>
