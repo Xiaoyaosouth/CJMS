@@ -39,7 +39,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<tr>
    		  <td>性别</td>
    		  <td>${teaPojo.teacher_gender eq 1?"男":"女"}</td>
-   		  <td><input type="text" name="teacher_gender" value="${teaPojo.teacher_gender eq 1?"1":"0"}" required/>
+   		  <td>
+   		    <c:choose>
+   		      <c:when test="${teaPojo.teacher_gender == 1}">
+   		        <input type="radio" name="teacher_gender" value="1" checked="checked">男
+   		        &nbsp;&nbsp;
+   		        <input type="radio" name="teacher_gender" value="0" >女
+   		      </c:when>
+   		      <c:when test="${teaPojo.teacher_gender == 0}">
+   		        <input type="radio" name="teacher_gender" value="1" >男
+   		        &nbsp;&nbsp;
+   		        <input type="radio" name="teacher_gender" value="0" checked="checked">女
+   		      </c:when>
+   		    </c:choose>
 	   	  </td>
    		</tr>
    		<tr>
@@ -53,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		  <td><input type="text" name="teacher_tel" value="${teaPojo.teacher_tel }" required/></td>
    		</tr>
 	  </table>
-		<input type="submit" value="确认修改" />
+		<input type="submit" value="修改" />
 	</form>
 </body>
 </html>

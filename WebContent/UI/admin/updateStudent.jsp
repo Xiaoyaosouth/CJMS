@@ -43,14 +43,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		</tr>
    		<tr>
    		  <td>性别</td>
+   		  <td>${stuPojo.student_gender eq 1?"男":"女"}</td>
    		  <td>
    		    <c:choose>
-	   		  <c:when test="${stuPojo.student_gender == 1 }">男</c:when>
-	   		  <c:when test="${stuPojo.student_gender == 2 }">女</c:when>
-	   		  <c:otherwise>???</c:otherwise>
-	   		</c:choose>
-	   	  </td>
-   		  <td><input type="text" name="student_gender" required/>
+   		      <c:when test="${stuPojo.student_gender == 1}">
+   		        <input type="radio" name="student_gender" value="1" checked="checked">男
+   		        &nbsp;&nbsp;
+   		        <input type="radio" name="student_gender" value="0" >女
+   		      </c:when>
+   		      <c:when test="${stuPojo.student_gender == 0}">
+   		        <input type="radio" name="student_gender" value="1" >男
+   		        &nbsp;&nbsp;
+   		        <input type="radio" name="student_gender" value="0" checked="checked">女
+   		      </c:when>
+   		    </c:choose>
 	   	  </td>
    		</tr>
    		<tr>

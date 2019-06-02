@@ -34,11 +34,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td>性别</td>
-				<td><input type="text" name="student_gender" required/></td>
+				<td>
+				  <input type="radio" name="student_gender" value="1" checked="checked">男
+				  &nbsp;&nbsp;
+				  <input type="radio" name="student_gender" value="0" >女
+				</td>
 			</tr>
 			<tr>
 				<td>邮箱</td>
-				<td><input type="text" name="student_mail" required/></td>
+				<td><input type="text" name="student_mail" /></td>
 			</tr>
 			<tr>
 				<td>手机号</td>
