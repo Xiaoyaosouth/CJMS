@@ -33,13 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<td>${teaPojo.teacher_password }</td>			
   			<td>				
   			  <c:choose>
-	   			<c:when test="${teaPojo.teacher_gender == 1 }">
-	   					男
-	   			</c:when>
-	   			<c:when test="${teaPojo.teacher_gender == 2 }">
-	   					女
-	   			</c:when>
-	   			<c:otherwise>???</c:otherwise>
+	   			<c:when test="${teaPojo.teacher_gender == 1 }">男</c:when>
+	   			<c:when test="${teaPojo.teacher_gender == 0 }">女</c:when>
 	   		  </c:choose>
 	   		</td>
 			<td>${teaPojo.teacher_mail }</td>
