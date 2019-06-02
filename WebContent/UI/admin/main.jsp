@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <li><a href="#" target="_context">统计成绩</a></li>
 		          </ul>
 		        </li>
-		        <li><a href="../help.html" target="_context">帮助<span class="sr-only">(current)</span></a></li>
+		        <li><a href="help?role=admin" target="_context">帮助<span class="sr-only">(current)</span></a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="logout" target="_top">退出系统</a></li>

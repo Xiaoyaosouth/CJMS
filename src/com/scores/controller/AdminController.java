@@ -313,4 +313,15 @@ public class AdminController {
 		mv.setViewName("findAllCourse?semester=null");
 		return mv;
 	}
+	
+	/**
+	 * 帮助页面
+	 * @return
+	 */
+	@RequestMapping("help")
+	public ModelAndView adminHelp() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("UI/help.jsp");
+		return mv;
+	}
 }

@@ -12,12 +12,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<base href="<%=basePath%>">
 	</head>
 	<body>
+	这是一个帮助页面哦~
 		<table align="center" border="1" style="margin-top: 120px;">
 			<tr>
 				<td>版本：</td>
 			</tr>
 			<tr>
-				<td>初始版</td>
+				<td>初始版：</td>
 			</tr>
 		</table>
 	</body>
