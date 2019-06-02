@@ -200,11 +200,17 @@ public class AdminController {
 	 * @author 逍遥
 	 */
 	@RequestMapping("changeAdminPassword")
-	public ModelAndView changeAdminPwd(@RequestParam(value="admin_id") String admId,
-			@RequestParam(value="newpwd") String newpwd){
+	public ModelAndView changeAdminPwd(
+			@RequestParam(value="admin_id") String admId,
+			@RequestParam(value="newpwd") String npwd,
+			@RequestParam(value="confirmpwd") String cpwd){
 		ModelAndView mv = new ModelAndView();
-		String str = adminServiceImpl.updAdminPassword(admId, newpwd);
-		mv.addObject("msg", str);
+		if (!npwd.equals(cpwd)) {
+			mv.addObject("msg", "【错误】两次输入的密码不相同，请重新输入");
+		}else {
+			String str = adminServiceImpl.updAdminPassword(admId, npwd);
+			mv.addObject("msg", str);
+		}
 		mv.setViewName("UI/admin/changePassword.jsp?admId="+admId);
 		return mv;
 	}
