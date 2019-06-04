@@ -11,9 +11,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="UTF-8">
 		<title>课程所有学生成绩信息</title>
 		<base href="<%=basePath%>">
+		<!-- Bootstrap -->
+      <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+      <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
-		<table align="center" border="1" style="margin-top: 100px;">
+		<table align="center"  class="table table-striped table-bordered" style="margin-top: 10px;">
 			<tr>
 				<td>课程总人数：</td>
 				<td>平均成绩：</td>
@@ -31,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>${failNum}</td>
 			</tr>
 		</table>
-		<table align="center" border="1" style="margin-top: 20px;">
+		<table align="center" class="table table-striped table-bordered" style="margin-top: 20px;">
 			<tr>
 				<td>学号</td>
 				<td>姓名</td>

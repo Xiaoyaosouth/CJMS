@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <body>
   	<!--头部-->
-  	<header class="student_header">
+  	<header class="teacher_header">
   		<!--导航条-->
 		<nav class="navbar navbar-inverse" style="border-radius: 0;">
 		  <div class="container-fluid">
@@ -43,8 +43,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <li><a href="UI/teacher/searchgrade.jsp" target="_context">查询成绩</a></li>
 		          </ul>
 		        </li>
-		        <li><a href="#" target="_context">课程管理<span class="sr-only">(current)</span></a></li>
-		        <li><a href="../help.html" target="_context">帮助<span class="sr-only">(current)</span></a></li>
+		        <li><a href="managercourse" target="_context">课程管理<span class="sr-only">(current)</span></a></li>
+		        <li><a href="UI/help.jsp" target="_context">帮助<span class="sr-only">(current)</span></a></li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="logout" target="_top">退出系统</a></li>

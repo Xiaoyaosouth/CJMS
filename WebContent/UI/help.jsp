@@ -10,15 +10,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="UTF-8">
 		<title>帮助信息</title>
 		<base href="<%=basePath%>">
+		 <!-- Bootstrap -->
+	      <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+	      <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
 	这是一个帮助页面哦~
-		<table align="center" border="1" style="margin-top: 120px;">
-			<tr>
-				<td>版本：</td>
+		<table align="center" class="table table-striped table-bordered">
+			<tr align="center">
+				<td>版本：123456</td>
 			</tr>
-			<tr>
-				<td>初始版：</td>
+			<tr align="center">
+				<td>初始版：123456</td>
 			</tr>
 		</table>
 	</body>
