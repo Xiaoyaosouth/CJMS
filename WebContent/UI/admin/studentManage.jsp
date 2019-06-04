@@ -11,12 +11,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="UTF-8">
 		<title>学生管理</title>
 		<base href="<%=basePath%>">
+	  <!-- Bootstrap -->
+      <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+      <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
 	<h3>${msg }</h3>
-	<a href="UI/admin/addStudent.jsp"><input type="button" value="添加学生" /></a><br>
-	查询完成，共查询到&nbsp;${stuList.size() }&nbsp;条数据。<br>
-	  <table border="1">
+	<input type="button" value="添加学生"  class="btn btn-default" 
+	       onclick="window.location.href='UI/admin/addStudent.jsp'"/>
+	<p>查询完成，共查询到&nbsp;${stuList.size() }&nbsp;条数据。</p>
+	  <table class="table table-striped table-bordered" >
    		<tr>
    			<th>学号</th>
    			<th>姓名</th>
@@ -41,9 +45,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   		</td>
 			<td>${stuPojo.student_mail }</td>
   			<td>${stuPojo.student_tel }</td>  			
-  			<td><!-- 用超链接传值方式把id传给控制层 -->
-			<a href="redirectView?id=${stuPojo.student_id }&role=student">修改</a> 
-			<a href="deleteStudent?stuId=${stuPojo.student_id }">删除</a>
+  			<td>
+  			<input type="button" value="修改" class="btn btn-default" 
+  			       onclick="window.location.href='redirectView?id=${stuPojo.student_id }&role=student'"/>
+			<input type="button" value="删除" class="btn btn-default" 
+  			       onclick="window.location.href='deleteStudent?stuId=${stuPojo.student_id }'"/>
 			</td>
    		</tr>
    		</c:forEach> 
