@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<td>
   			<input type="button" value="修改" class="btn btn-default" 
   			       onclick="window.location.href='redirectView?id=${stuPojo.student_id }&role=student'"/>
-			<input type="button" value="删除" class="btn btn-default" 
+			<input type="button" value="删除" class="btn btn-danger" 
   			       onclick="window.location.href='deleteStudent?stuId=${stuPojo.student_id }'"/>
 			</td>
    		</tr>
