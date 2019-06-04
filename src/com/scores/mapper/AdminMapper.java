@@ -173,7 +173,7 @@ public interface AdminMapper {
 	 * @author 逍遥
 	 */
 	@Select("SELECT * FROM course WHERE course_id=#{courseId}")
-	public Course selCourseById(String courseId);
+	public Course selCourseById(int courseId);
 	
 	/**
 	 * 查询所有课程，按学期降序
@@ -189,7 +189,7 @@ public interface AdminMapper {
 	 * @author 逍遥
 	 */
 	@Delete("DELETE FROM course where course_id = #{courseId}")
-	public int deleteCourseById(String courseId);
+	public int deleteCourseById(int courseId);
 	
 	/**
 	 * 更新课程数据（要注意处理传入的ID不能为空）
@@ -202,4 +202,12 @@ public interface AdminMapper {
 			+ "course_semester=#{course_semester},is_done=#{is_done}"
 			+ " WHERE course_id=#{course_id}")
 	public int updateCourse(Course course);
+	
+	/**
+	 * 由成绩ID查询成绩
+	 * @param grdId 成绩ID
+	 * @return 成绩实体
+	 */
+	@Select("SELECT * FROM grade WHERE grade_id=#{grdId}")
+	public Grade selGradeByGradeId(int grdId);
 }

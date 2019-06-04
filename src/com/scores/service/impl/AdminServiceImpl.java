@@ -13,14 +13,14 @@ import com.scores.service.*;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	
+
 	@Resource
 	private AdminMapper adminMapper;
 
 	@Override
 	public Admin login(Admin admin) {
-		Logger logger=Logger.getLogger(AdminServiceImpl.class);
-		logger.info(admin.getAdmin_id()+"尝试登录");
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		logger.info(admin.getAdmin_id() + "尝试登录");
 		return adminMapper.selAdmin(admin);
 	}
 
@@ -28,7 +28,7 @@ public class AdminServiceImpl implements AdminService {
 	public List<Student> getStudentList() {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		List<Student> stuList = adminMapper.findAllStudent();
-		logger.info("查询学生表，共"+stuList.size()+"条数据");
+		logger.info("查询学生表，共" + stuList.size() + "条数据");
 		return stuList;
 	}
 
@@ -36,17 +36,16 @@ public class AdminServiceImpl implements AdminService {
 	public String insStudent(Student student) {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		// 先从数据库查找是否已存在该ID的学生
-		logger.info("尝试查找ID为"+student.getStudent_id()+"的学生");
+		logger.info("尝试查找ID为" + student.getStudent_id() + "的学生");
 		Student tempStudent = selStudentById(student.getStudent_id());
-		if (tempStudent != null &&
-				tempStudent.getStudent_id().equals(student.getStudent_id())) {
+		if (tempStudent != null && tempStudent.getStudent_id().equals(student.getStudent_id())) {
 			return "添加失败，已存在相同ID的学生";
-		}else {
+		} else {
 			logger.info("尝试添加学生数据");
 			int result = adminMapper.insertStudent(student);
 			if (result > 0) {
 				return "Added successfully";
-			}else {
+			} else {
 				return "error";
 			}
 		}
@@ -57,16 +56,16 @@ public class AdminServiceImpl implements AdminService {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		String str = null;
 		// 先从数据库查找是否已存在该ID的学生
-		logger.info("尝试查找ID为"+stuId+"的学生");
+		logger.info("尝试查找ID为" + stuId + "的学生");
 		Student tempStudent = selStudentById(stuId);
 		if (tempStudent == null) {
 			str = "删除失败，学生不存在";
-		}else {
+		} else {
 			logger.info("尝试删除学生");
 			int result = adminMapper.deleteStudentById(stuId);
 			if (result > 0) {
 				str = "Deleted successfully";
-			}else {
+			} else {
 				str = "error";
 			}
 		}
@@ -78,16 +77,16 @@ public class AdminServiceImpl implements AdminService {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		String str = null;
 		// 先从数据库查找是否已存在该ID的学生
-		logger.info("尝试查找ID为"+student.getStudent_id()+"的学生");
+		logger.info("尝试查找ID为" + student.getStudent_id() + "的学生");
 		Student tempStudent = selStudentById(student.getStudent_id());
 		if (tempStudent == null) {
 			str = "修改失败，学生不存在";
-		}else {
+		} else {
 			logger.info("尝试修改学生数据");
 			int result = adminMapper.updateStudent(student);
 			if (result > 0) {
 				str = "Updated successfully";
-			}else {
+			} else {
 				str = "error";
 			}
 		}
@@ -98,7 +97,7 @@ public class AdminServiceImpl implements AdminService {
 	public List<Teacher> getTeacherList() {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		List<Teacher> teaList = adminMapper.findAllTeacher();
-		logger.info("查询教师表，共"+teaList.size()+"条数据");
+		logger.info("查询教师表，共" + teaList.size() + "条数据");
 		return teaList;
 	}
 
@@ -106,17 +105,16 @@ public class AdminServiceImpl implements AdminService {
 	public String insTeacher(Teacher teacher) {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		// 先从数据库查找是否已存在该ID的教师
-		logger.info("尝试查找ID为"+teacher.getTeacher_id()+"的教师");
+		logger.info("尝试查找ID为" + teacher.getTeacher_id() + "的教师");
 		Teacher tempTeacher = selTeacherById(teacher.getTeacher_id());
-		if (tempTeacher != null &&
-				tempTeacher.getTeacher_id().equals(teacher.getTeacher_id())) {
+		if (tempTeacher != null && tempTeacher.getTeacher_id().equals(teacher.getTeacher_id())) {
 			return "添加失败，已存在相同ID的教师";
-		}else {
+		} else {
 			logger.info("尝试添加教师数据");
 			int result = adminMapper.insertTeacher(teacher);
 			if (result > 0) {
 				return "Added teacher successfully";
-			}else {
+			} else {
 				return "error";
 			}
 		}
@@ -127,16 +125,16 @@ public class AdminServiceImpl implements AdminService {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		String str = null;
 		// 先从数据库查找是否已存在该ID的教师
-		logger.info("尝试查找ID为"+teaId+"的教师");
+		logger.info("尝试查找ID为" + teaId + "的教师");
 		Teacher tempTeacher = selTeacherById(teaId);
 		if (tempTeacher == null) {
 			str = "删除失败，教师不存在";
-		}else {
+		} else {
 			logger.info("尝试删除教师");
 			int result = adminMapper.deleteTeacherById(teaId);
 			if (result > 0) {
 				str = "Deleted teacher successfully";
-			}else {
+			} else {
 				str = "error";
 			}
 		}
@@ -148,16 +146,16 @@ public class AdminServiceImpl implements AdminService {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		String str = null;
 		// 先从数据库查找是否已存在该ID的教师
-		logger.info("尝试查找ID为"+teacher.getTeacher_id()+"的教师");
+		logger.info("尝试查找ID为" + teacher.getTeacher_id() + "的教师");
 		Teacher tempTeacher = selTeacherById(teacher.getTeacher_id());
 		if (tempTeacher == null) {
 			str = "修改失败，教师不存在";
-		}else {
+		} else {
 			logger.info("尝试修改教师数据");
 			int result = adminMapper.updateTeacher(teacher);
 			if (result > 0) {
 				str = "Updated teacher successfully";
-			}else {
+			} else {
 				str = "error";
 			}
 		}
@@ -172,17 +170,16 @@ public class AdminServiceImpl implements AdminService {
 		Admin admin = selAdminById(admId);
 		if (admin == null) {
 			str = "修改密码失败，管理员不存在";
-		}else {
-			if (newpwd !=null && 
-					newpwd.equals(admin.getAdmin_password())) {
+		} else {
+			if (newpwd != null && newpwd.equals(admin.getAdmin_password())) {
 				str = "修改密码失败，新密码与旧密码相同";
-			}else {
+			} else {
 				logger.info("尝试修改管理员密码");
 				admin.setAdmin_password(newpwd);
 				int result = adminMapper.updAdminPwd(admin);
 				if (result > 0) {
 					str = "Updated password successfully";
-				}else {
+				} else {
 					str = "error";
 				}
 			}
@@ -193,7 +190,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Admin selAdminById(String admId) {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
-		logger.info("尝试查找ID为"+admId+"的管理员");
+		logger.info("尝试查找ID为" + admId + "的管理员");
 		Admin admin = adminMapper.selAdminById(admId);
 		if (admin != null) {
 			return admin;
@@ -215,7 +212,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Course> selCourseBySemester(String semester) {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
-		logger.info("尝试查询学期为"+semester+"的课程");
+		logger.info("尝试查询学期为" + semester + "的课程");
 		List<Course> courseList = adminMapper.selCourseBySemester(semester);
 		if (courseList != null) {
 			return courseList;
@@ -230,17 +227,16 @@ public class AdminServiceImpl implements AdminService {
 		// 先从数据库查找是否已存在该ID的课程
 		int courseId = course.getCourse_id();
 		if (courseId != 0) {
-			logger.info("尝试查找ID为"+courseId+"的课程");
-			Course tempCourse = selCourseById(String.valueOf(courseId));
-			if (tempCourse != null &&
-					tempCourse.getCourse_id() == courseId) {
+			logger.info("尝试查找ID为" + courseId + "的课程");
+			Course tempCourse = selCourseById(courseId);
+			if (tempCourse != null && tempCourse.getCourse_id() == courseId) {
 				str = "添加失败，已存在相同ID的课程";
-			}else {
+			} else {
 				logger.info("尝试添加课程数据");
 				int result = adminMapper.insertCourse(course);
 				if (result > 0) {
 					str = "Added course successfully";
-				}else {
+				} else {
 					str = "error";
 				}
 			}
@@ -260,20 +256,20 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public String delCourse(String courseId) {
+	public String delCourse(int courseId) {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		String str = null;
 		// 先从数据库查找是否已存在该ID的课程
-		logger.info("尝试查找ID为"+courseId+"的课程");
+		logger.info("尝试查找ID为" + courseId + "的课程");
 		Course tempCourse = selCourseById(courseId);
 		if (tempCourse == null) {
 			str = "删除失败，课程不存在";
-		}else {
+		} else {
 			logger.info("尝试删除课程");
 			int result = adminMapper.deleteCourseById(courseId);
 			if (result > 0) {
 				str = "Deleted course successfully";
-			}else {
+			} else {
 				str = "error";
 			}
 		}
@@ -286,17 +282,16 @@ public class AdminServiceImpl implements AdminService {
 		String str = null;
 		String courseId = null;
 		// 先从数据库查找是否已存在该ID的课程
-		courseId = String.valueOf(course.getCourse_id());
-		logger.info("尝试查找ID为"+courseId+"的课程");
-		Course tempCourse = selCourseById(courseId);
+		logger.info("尝试查找ID为" + courseId + "的课程");
+		Course tempCourse = selCourseById(course.getCourse_id());
 		if (tempCourse == null) {
 			str = "修改失败，课程不存在";
-		}else {
+		} else {
 			logger.info("尝试修改课程数据");
 			int result = adminMapper.updateCourse(course);
 			if (result > 0) {
 				str = "Updated course successfully";
-			}else {
+			} else {
 				str = "error";
 			}
 		}
@@ -304,9 +299,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Course selCourseById(String courseId) {
+	public Course selCourseById(int courseId) {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
-		logger.info("尝试查找ID为"+courseId+"的课程");
+		logger.info("尝试查找ID为" + courseId + "的课程");
 		Course course = adminMapper.selCourseById(courseId);
 		if (course != null) {
 			return course;
@@ -317,19 +312,35 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Teacher selTeacherById(String teaId) {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
-		logger.info("尝试查找ID为"+teaId+"的教师");
+		logger.info("尝试查找ID为" + teaId + "的教师");
 		Teacher teacher = adminMapper.selTeacherById(teaId);
 		if (teacher != null) {
 			return teacher;
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Student selStudentById(String stuId) {
-		Logger logger=Logger.getLogger(StudentServiceImpl.class);
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		logger.info("尝试由学生ID查找学生");
 		return adminMapper.selStudentById(stuId);
+	}
+
+	@Override
+	public Grade selGradeById(int grdId) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		logger.info("尝试由成绩ID查找成绩");
+		Grade grade = adminMapper.selGradeByGradeId(grdId);
+		Student student = selStudentById(grade.getGrade_student());
+		Course course = selCourseById(grade.getGrade_course());
+		if (student != null) {
+			grade.setStudent(student);
+		}
+		if (course != null) {
+			grade.setCourse(course);
+		}
+		return grade;
 	}
 
 }

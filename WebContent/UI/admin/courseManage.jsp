@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <option value="${semester }">${semester }</option>
 	  </c:forEach>
 	</select>
-	<input type="submit" value="显示课程"/><br><br>
+	<input type="submit" value="显示课程" target="_context" class="btn btn-default" />
 	</form>
 	
 	<p>查询完成，共查询到&nbsp;${courseList.size() }&nbsp;条数据。</p>
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<tr>
    			<th>课程编号</th>
    			<th>课程名</th>
-   			<th>任课教师</th>
+   			<th>任课教师ID</th>
    			<th>学分</th>
    			<th>学期</th>
    			<th>是否录入完成</th>
@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<td>
   			  <input type="button" value="修改" class="btn btn-default" 
 	                 onclick="window.location.href='redirectView?id=${coursePojo.course_id }&role=course'"/>
-	          <input type="button" value="删除" class="btn btn-default" 
+	          <input type="button" value="删除" class="btn btn-danger" 
 	                 onclick="window.location.href='deleteCourse?courseId=${coursePojo.course_id }'"/>
 			</td>
    		</tr>

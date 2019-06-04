@@ -119,7 +119,7 @@ public interface AdminService {
 	 * @return
 	 * @author 逍遥
 	 */
-	public String delCourse(String courseId);
+	public String delCourse(int courseId);
 	
 	/**
 	 * 更新课程数据
@@ -134,7 +134,7 @@ public interface AdminService {
 	 * @param courseId 课程ID
 	 * @return 课程实体
 	 */
-	public Course selCourseById(String courseId);
+	public Course selCourseById(int courseId);
 	
 	/**
 	 * 根据ID查询教师
@@ -149,4 +149,12 @@ public interface AdminService {
 	 * @return 学生实体
 	 */
 	public Student selStudentById(String stuId);
+	
+	/**
+	 * 根据ID查询成绩
+	 * @param grdId 成绩ID
+	 * @return 成绩实体
+	 * @author 逍遥
+	 */
+	public Grade selGradeById(int grdId);
 }
