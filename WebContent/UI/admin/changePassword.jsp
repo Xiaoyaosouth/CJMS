@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  <input type="submit" value="修改" class="btn btn-warning"/>
 						&nbsp;&nbsp;
 					  <input type="button" value="返回" class="btn btn-default" 
-  			                 onclick="window.location.href='UI/admin/person.jsp'"/>
+  			                 onclick="window.location.href='<%=basePath%>UI/admin/person.jsp'"/>
 					</td>
 				</tr>
 				<tr align="center">

@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
   </head>
 <body>
-  <a href="findAllCourse?semester=null">返回课程列表</a><br>
+  <a href="findAllCourse">返回课程列表</a><br>
 	<form method="post" action="updateCourse">
 	  <table>
 		<tr>

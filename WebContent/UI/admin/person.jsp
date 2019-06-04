@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td>姓名：</td>
-				<td>${admin.admin_name}(管理员)</td>
+				<td>${admin.admin_name}</td>
 			</tr>
 			<tr>
 				<td>性别：</td>
@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tr align="center">
 				<td colspan="2">
 				  <input type="button" value="修改密码" target="_context" class="btn btn-warning" 
-  			             onclick="window.location.href='UI/admin/changePassword.jsp?admId=${admin.admin_id}'"/>
+  			             onclick="window.location.href='<%=basePath%>UI/admin/changePassword.jsp?admId=${admin.admin_id}'"/>
 				</td>
 			</tr>
 		</table>
