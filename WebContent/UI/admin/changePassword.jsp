@@ -10,9 +10,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="UTF-8">
 		<title>修改密码</title>
 		<base href="<%=basePath%>">
+	  <!-- Bootstrap -->
+      <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+      <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
-		<form action="changeAdminPassword" method="post" id="myChangePwdForm">
+		<form action="changeAdminPassword" method="post">
 			<table align="center" border="1" style="margin-top: 120px;">
 				<tr>
 					<td>ID：</td>
@@ -28,8 +31,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr align="center">
 					<td colspan="2">
-						<input type="submit" value="修改"/>
-						&nbsp;&nbsp;<a href="UI/admin/person.jsp">返回</a>
+					  <input type="submit" value="修改" class="btn btn-warning"/>
+						&nbsp;&nbsp;
+					  <input type="button" value="返回" class="btn btn-default" 
+  			                 onclick="window.location.href='UI/admin/person.jsp'"/>
 					</td>
 				</tr>
 				<tr align="center">
