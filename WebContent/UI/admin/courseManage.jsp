@@ -11,12 +11,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="UTF-8">
 		<title>课程管理</title>
 		<base href="<%=basePath%>">
+	  <!-- Bootstrap -->
+      <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+      <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
-	<h3>${msg }</h3>
-	<a href="tryAddCourse"><input type="button" value="添加课程" /></a><br><br>
-	<form action="findAllCourse" method="post">
+	  <h3>${msg }</h3>
+	  <input type="button" value="添加课程"  class="btn btn-default" 
+	         onclick="window.location.href='<%=basePath%>tryAddCourse'"/>
 	
+	<form action="findAllCourse" method="post">
 	<!-- 先从数据库抓取所有学期，让用户选择 -->
 	选择学期：<select id="mySelect" name="semester">
 	  <c:forEach var="semester" items="${semesterList }">
@@ -26,8 +30,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<input type="submit" value="显示课程"/><br><br>
 	</form>
 	
-	查询完成，共查询到&nbsp;${courseList.size() }&nbsp;条数据。<br><br>
-	  <table border="1">
+	<p>查询完成，共查询到&nbsp;${courseList.size() }&nbsp;条数据。</p>
+	  <table class="table table-striped table-bordered">
    		<tr>
    			<th>课程编号</th>
    			<th>课程名</th>
@@ -45,9 +49,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<td>${coursePojo.course_credit }</td>
   			<td>${coursePojo.course_semester }</td>	
   			<td>${coursePojo.is_done eq true?"是":"否"}</td>
-  			<td><!-- 用超链接传值方式把id传给控制层 -->
-			<a href="redirectView?id=${coursePojo.course_id }&role=course">修改</a> 
-			<a href="deleteCourse?courseId=${coursePojo.course_id }">删除</a>
+  			<td>
+  			  <input type="button" value="修改" class="btn btn-default" 
+	                 onclick="window.location.href='redirectView?id=${coursePojo.course_id }&role=course'"/>
+	          <input type="button" value="删除" class="btn btn-default" 
+	                 onclick="window.location.href='deleteCourse?courseId=${coursePojo.course_id }'"/>
 			</td>
    		</tr>
    		</c:forEach> 
