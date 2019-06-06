@@ -328,7 +328,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Grade selGradeById(int grdId) {
+	public Grade selGradeById(String grdId) {
 		Logger logger = Logger.getLogger(AdminServiceImpl.class);
 		logger.info("尝试由成绩ID查找成绩");
 		Grade grade = adminMapper.selGradeByGradeId(grdId);
@@ -341,6 +341,28 @@ public class AdminServiceImpl implements AdminService {
 			grade.setCourse(course);
 		}
 		return grade;
+	}
+
+	@Override
+	public String updGrade(Grade grade) {
+		Logger logger = Logger.getLogger(AdminServiceImpl.class);
+		String str = null;
+		String gradeId = null;
+		// 先从数据库查找是否已存在该ID的课程
+		logger.info("尝试查找ID为" + gradeId + "的成绩");
+		Grade tempGrade = selGradeById(grade.getGrade_id());
+		if (tempGrade == null) {
+			str = "修改失败，成绩不存在";
+		} else {
+			logger.info("尝试修改成绩");
+			int result = adminMapper.updateGrade(grade);
+			if (result > 0) {
+				str = "success";
+			} else {
+				str = "error";
+			}
+		}
+		return str;
 	}
 
 }

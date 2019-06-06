@@ -209,5 +209,16 @@ public interface AdminMapper {
 	 * @return 成绩实体
 	 */
 	@Select("SELECT * FROM grade WHERE grade_id=#{grdId}")
-	public Grade selGradeByGradeId(int grdId);
+	public Grade selGradeByGradeId(String grdId);
+	
+	/**
+	 * 更新成绩（要注意处理传入的ID不能为空）
+	 * @param grade 成绩实体
+	 * @return 影响记录数
+	 * @author 逍遥
+	 */
+	@Update("UPDATE grade SET "
+			+ "grade_fraction=#{grade_fraction}"
+			+ " WHERE grade_id=#{grade_id}")
+	public int updateGrade(Grade grade);
 }

@@ -126,10 +126,15 @@ public class AdminController {
 			mv.addObject("coursePojo", course);
 			mv.setViewName("UI/admin/updateCourse.jsp");
 			break;
-		case "grade": // 修改成绩
-			Grade grade = adminServiceImpl.selGradeById(Integer.parseInt(id));
-			mv.addObject("gradePojo", grade);
-			mv.setViewName("UI/admin/updateStuGrade.jsp");
+		case "gradeInStuPage": // 修改成绩
+			Grade sgrade = adminServiceImpl.selGradeById(id);
+			mv.addObject("gradePojo", sgrade);
+			mv.setViewName("UI/admin/updateGradeInStuPage.jsp");
+			break;
+		case "gradeInCourPage": // 修改成绩
+			Grade cgrade = adminServiceImpl.selGradeById(id);
+			mv.addObject("gradePojo", cgrade);
+			mv.setViewName("UI/admin/updateGradeInCourPage.jsp");
 			break;
 		default:
 			break;
@@ -321,7 +326,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 更新课程
+	 * 修改课程
 	 * 
 	 * @param course
 	 * @return
@@ -331,7 +336,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		String str = adminServiceImpl.updCourse(course);
 		mv.addObject("msg", str);
-		mv.setViewName("findAllCourse?semester=null");
+		mv.setViewName("findAllCourse");
 		return mv;
 	}
 
@@ -348,34 +353,110 @@ public class AdminController {
 	}
 
 	/**
-	 * 【查询成绩】由学生ID查询学生成绩
+	 * 【查询成绩】管理员查询成绩（需传入类型：stu表示学号，cour表示课程号）
 	 * 
 	 * @param key
 	 * @return
 	 */
-	@RequestMapping("adminSearchStuGrade")
-	public ModelAndView searchStuGrade(String key) {
+	@RequestMapping("adminSearchGrade")
+	public ModelAndView adminSearchGrade(String id, @RequestParam(value = "type", required = false) String type) {
 		ModelAndView mv = new ModelAndView();
-		List<Grade> listGrade = teacherServiceImpl.selGradeByStu(key);
-		String[] str = teacherServiceImpl.selStuStatistics(key);
-		String avg = str[0];// 平均成绩
-		String avgpot = str[1];// 平均绩点
-		String cridit = str[2];// 已修学分
-		String courseNum = str[3];// 已修课程
-		String fileNum = str[4];// 挂科数
-		mv.addObject("avg", avg);
-		mv.addObject("avgpot", avgpot);
-		mv.addObject("cridit", cridit);
-		mv.addObject("courseNum", courseNum);
-		mv.addObject("fileNum", fileNum);// 统计信息
-		if (listGrade.toString().equals("[]")) {
-			mv.addObject("msg", "error,请输入学号");
-		} else {
-			mv.addObject("stuId", key);
-			mv.addObject("listGrade", listGrade);
+		if (type.equals("stu")) { // 由学号查询成绩
+			List<Grade> listGrade = teacherServiceImpl.selGradeByStu(id);
+			String[] str = teacherServiceImpl.selStuStatistics(id);
+			String avg = str[0];// 平均成绩
+			String avgpot = str[1];// 平均绩点
+			String cridit = str[2];// 已修学分
+			String courseNum = str[3];// 已修课程
+			String fileNum = str[4];// 挂科数
+			mv.addObject("avg", avg);
+			mv.addObject("avgpot", avgpot);
+			mv.addObject("cridit", cridit);
+			mv.addObject("courseNum", courseNum);
+			mv.addObject("fileNum", fileNum);// 统计信息
+			if (listGrade.toString().equals("[]")) {
+				mv.addObject("msg", "【错误】请输入学号");
+				mv.setViewName("error.jsp");
+			} else {
+				mv.addObject("stuId", id);
+				mv.addObject("listGrade", listGrade);
+				mv.setViewName("UI/admin/stuGrade.jsp");
+			}
+
+		} else if (type.equals("cour")) { // 由课程号查询成绩
+			List<Grade> listGrade = teacherServiceImpl.selGradeLogByCourse(id);
+			String[] str = teacherServiceImpl.selCourseStatistics(id);
+			String stuNum = str[0];
+			String avg = str[1];
+			String max = str[2];
+			String min = str[3];
+			String goodNum = str[4];
+			String failNum = str[5];
+			mv.addObject("stuNum", stuNum);
+			mv.addObject("avg", avg);
+			mv.addObject("max", max);
+			mv.addObject("min", min);
+			mv.addObject("goodNum", goodNum);
+			mv.addObject("failNum", failNum);// 统计信息
+			if (listGrade.toString().equals("[]")) {
+				mv.addObject("msg", "【错误】请输入课程号");
+				mv.setViewName("error.jsp");
+			} else {
+				mv.addObject("listGrade", listGrade);
+				mv.addObject("courId", id);
+				mv.setViewName("UI/admin/courseGrade.jsp");
+			}
 		}
-		mv.setViewName("UI/admin/stuGrade.jsp");
 		return mv;
 	}
 
+	/**
+	 * 跳转到searchGradeByCourId.jsp（在输入课程号前将课程显示到页面）
+	 * 
+	 * @param key
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping("trySearchGradeByCourId")
+	public ModelAndView trySearchGradeByCourId() {
+		ModelAndView mv = new ModelAndView();
+		// 查询所有课程
+		List<Course> courseList = adminServiceImpl.selAllCourse();
+		if (courseList != null) {
+			mv.addObject("courseList", courseList);
+		} else {
+			mv.addObject("msg", "【错误】显示所有课程失败");
+		}
+		mv.setViewName("UI/admin/searchGradeByCourId.jsp");
+		return mv;
+	}
+
+	/**
+	 * 管理员修改成绩
+	 * 
+	 * @param grade
+	 * @return
+	 */
+	@RequestMapping("adminUpdateStuGrade")
+	public ModelAndView updateStuGrade(Grade grade,
+			@RequestParam(value = "backPage", required = false) String backPage) {
+		ModelAndView mv = new ModelAndView();
+		String stuId = grade.getGrade_student();
+		int courId = grade.getGrade_course();
+		String str = adminServiceImpl.updGrade(grade);
+		if (str.equals("success")) {
+			str = new String("【成功】修改成绩");
+		} else {
+			str = new String("【失败】修改失败，未知错误");
+		}
+		mv.addObject("msg", str);
+		if (backPage.equals("stu")) {
+			mv.setViewName("adminSearchGrade?id=" + stuId + "&type=stu");
+		} else if (backPage.equals("cour")) {
+			mv.setViewName("adminSearchGrade?id=" + courId + "&type=cour");
+		} else {
+			mv.setViewName("error.jsp");
+		}
+		return mv;
+	}
 }

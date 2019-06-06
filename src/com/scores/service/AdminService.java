@@ -156,5 +156,12 @@ public interface AdminService {
 	 * @return 成绩实体
 	 * @author 逍遥
 	 */
-	public Grade selGradeById(int grdId);
+	public Grade selGradeById(String grdId);
+	
+	/**
+	 * 修改成绩（需传入成绩ID和成绩）
+	 * @param grade 成绩实体
+	 * @return
+	 */
+	public String updGrade(Grade grade);
 }

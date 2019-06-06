@@ -42,6 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <li><a href="findAllTeacher" target="_context">教师管理</a></li>
 		            <li role="separator" class="divider"></li>
 		            <li><a href="findAllStudent" target="_context">学生管理</a></li>
+		            <li role="separator" class="divider"></li>
 		          </ul>
 		        </li>
 		        <li class="dropdown">
@@ -56,11 +57,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">成绩管理<span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-		            <li><a href="UI/admin/searchGrade.jsp" target="_context">查询成绩</a></li>
+		            <li><a href="UI/admin/searchGradeByStuId.jsp" target="_context">按学号查询</a></li>
 		            <li role="separator" class="divider"></li>
-		            <li><a href="UI/admin/searchGrade.jsp" target="_context">修改成绩</a></li>
+		            <li><a href="trySearchGradeByCourId" target="_context">按课程号查询</a></li>
 		            <li role="separator" class="divider"></li>
-		            <li><a href="UI/admin/searchGrade.jsp" target="_context">统计成绩</a></li>
 		          </ul>
 		        </li>
 		        <li><a href="help?role=admin" target="_context">帮助<span class="sr-only">(current)</span></a></li>

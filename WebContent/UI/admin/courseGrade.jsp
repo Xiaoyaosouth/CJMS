@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>学生成绩信息</title>
+		<title>课程成绩信息</title>
 		<base href="<%=basePath%>">
 		<!-- Bootstrap -->
         <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
@@ -18,8 +18,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<body>
 	  <h3 style="color:red">${msg }</h3>
 	  <input type="button" value="返回" target="_context" class="btn btn-default" 
-  		     onclick="window.location.href='<%=basePath%>UI/admin/searchGradeByStuId.jsp'"/>
-  	  <p>学生${stuId }成绩统计信息</p>
+  		     onclick="window.location.href='<%=basePath%>trySearchGradeByCourId'"/>
+  	  <p>课程${courId }的成绩统计信息</p>
 		<table align="center" class="table table-striped table-bordered">
 			<tr>
 				<td>平均成绩</td>
@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 		</table>
 		
-	  <p>该学生所修课程成绩信息</p>
+	  <p>选修该课程的学生成绩信息</p>
 		<table align="center" class="table table-striped table-bordered">
 			<tr>
 				<td>学号、姓名</td>
@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>
 					  ${grades.grade_fraction }&nbsp;&nbsp;
 					  <input type="button" value="修改成绩" class="btn btn-warning" 
-  		                     onclick="window.location.href='<%=basePath%>redirectView?id=${grades.grade_id}&role=gradeInStuPage'"/>
+  		                     onclick="window.location.href='<%=basePath%>redirectView?id=${grades.grade_id}&role=gradeInCourPage'"/>
 					</td>
 				</tr>
 			</c:forEach>
