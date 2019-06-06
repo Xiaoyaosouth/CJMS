@@ -10,9 +10,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="UTF-8">
 		<title>课程成绩统计信息</title>
 		<base href="<%=basePath%>">
+		<!-- Bootstrap -->
+      <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+      <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
-		<table align="center" border="1" style="margin-top: 120px;">
+		<table align="center" class="table table-striped table-bordered" style="margin-top: 10px;">
 			<tr>
 				<td>课程总人数：</td>
 				<td>平均成绩：</td>

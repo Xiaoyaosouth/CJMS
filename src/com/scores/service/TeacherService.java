@@ -72,20 +72,19 @@ public interface TeacherService {
 	 * @return
 	 */
 	String[] selCourseStatistics(String CourseId);
+	
+	/**
+	 * 根据教师查找他的课程
+	 * @param id
+	 * @return
+	 */
+	List<Course> selCourseByTid(String id);
+	
+	/**
+	 * 插入成绩记录
+	 * @param id
+	 * @return
+	 */
+	int insGrade(String tid,String[] listStrdent);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

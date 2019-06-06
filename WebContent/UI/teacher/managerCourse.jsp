@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,30 +9,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>学生成绩统计信息</title>
+		<title>选择班级</title>
 		<base href="<%=basePath%>">
 		<!-- Bootstrap -->
       <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
       <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
-		<table align="center" class="table table-striped table-bordered" style="margin-top: 10px;">
+	
+		<table align="center" class="table table-striped table-bordered">
 			<tr>
-				<td>平均成绩</td>
-				<td>平均绩点</td>
-				<td>已修学分</td>
-				<td>已修课程</td>
-				<td>挂科数</td>
+				<td colspan="3">${msg}</td>
 			</tr>
 			<tr>
-				<td>${avg}</td>
-				<td>${avgpot}</td>
-				<td>${cridit}</td>
-				<td>${courseNum}</td>
-				<td>${fileNum}</td>
+				<td>课程ID</td>
+				<td>课程名</td>
+				<td>选择</td>
 			</tr>
+			<c:forEach  items="${listCourse}" var="courses">
+				<tr>
+					<td>${courses.course_id}</td>
+					<td>${courses.course_name}</td>
+					<td><a href="addstudentfirst?courseid=${courses.course_id}" class="btn btn-warning" >添加学生</a></td>
+				</tr>
+			</c:forEach>
 		</table>
-		
-		
 	</body>
 </html>

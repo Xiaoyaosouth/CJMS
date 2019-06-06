@@ -125,7 +125,12 @@ public interface TeacherMapper {
 	@Select("SELECT * FROM course WHERE course_id=#{id}")
 	public Course selCourseById(@Param("id")int id);
 	
+	@Select("SELECT * FROM course WHERE course_teacher=#{id}")
+	public List<Course> selCourseByTid(@Param("id")String id);
 	
+	@Insert("INSERT INTO grade (grade_id,grade_course,grade_student,grade_fraction,grade_semester) VALUES (default,#{cid},#{stuid},default,#{semester});")
+	public int insGrade(@Param("cid")String cid,@Param("stuid")String stuid,@Param("semester")int semester);
+
 }
 
 

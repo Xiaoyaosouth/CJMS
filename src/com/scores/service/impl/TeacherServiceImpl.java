@@ -164,7 +164,28 @@ public class TeacherServiceImpl implements TeacherService {
 				""+min,""+goodNum,""+failNum};
 		return str;
 	}
-
 	
+	/**
+	 * 根据教师查找他的课程
+	 * @param id
+	 * @return
+	 */
+	public List<Course> selCourseByTid(String id){
+		return teacherMapper.selCourseByTid(id);
+	}
+	
+	/**
+	 * 插入成绩记录
+	 * @param id
+	 * @return
+	 */
+	public int insGrade(String cid,String[] listStrdent) {
+		int result=0;
+		Course course=teacherMapper.selCourseById(Integer.parseInt(cid));
+		for(int i=0;i<listStrdent.length;i++) {
+			result=result+teacherMapper.insGrade(cid,listStrdent[i],course.getCourse_semester());
+		}
+		return result;
+	}
 
 }

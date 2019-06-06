@@ -12,16 +12,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="UTF-8">
 		<title>搜索成绩统计信息</title>
 		<base href="<%=basePath%>">
+		<!-- Bootstrap -->
+      <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+      <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
 		<form action="" method="post" id="myform">
-			<table align="center" border="1" style="margin-top: 120px;">
+			<table align="center"  style="margin-top: 10px;">
 				<tr>
 					<td>
 						<input type="text" name="id" autofocus/>
 					</td>
 					<td>
-						<input type="button" value="搜索" onclick="submitForm()"/>
+						<input type="button" value="搜索" onclick="submitForm()" class="btn btn-warning" />
 					</td>
 				</tr>
 				<tr>

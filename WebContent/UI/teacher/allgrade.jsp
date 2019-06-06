@@ -11,10 +11,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="UTF-8">
 		<title>录入成绩</title>
 		<base href="<%=basePath%>">
+		 <!-- Bootstrap -->
+	      <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+	      <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
 		<form action="insgrade" method="post">
-			<table align="center" border="1" style="margin-top: 120px;">
+			<table align="center" style="margin-top: 10px;"class="table table-striped table-bordered">
 				<tr>
 					<td>学号</td>
 					<td>姓名</td>
@@ -32,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:forEach>
 				<tr align="center" >
 					<td colspan="3">
-						<input type="submit"value="确认"/>
+						<input type="submit"value="确认"  class="btn btn-warning" />
 					</td>
 				</tr>
 				<tr align="center" >

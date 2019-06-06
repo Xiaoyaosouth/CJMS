@@ -270,7 +270,54 @@ public class TeacherController {
 		mv.setViewName("UI/teacher/courseStatistics.jsp");
 		return mv;
 	}
+	/**
+	 * 查询需要管理的课程
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping("managercourse")
+	public ModelAndView managerCourse(HttpSession session,ModelAndView mv) {
+		Teacher teacher=(Teacher)session.getAttribute("teacher");
+		mv.addObject("listCourse", teacherServiceImpl.selCourseByTid(teacher.getTeacher_id()));
+		mv.setViewName("UI/teacher/managerCourse.jsp");
+		return mv;
+	}
 	
+	/**
+	 * 为课程添加学生前
+	 * @param courseid
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping("addstudentfirst")
+	public ModelAndView addStudentFirst(String courseid,ModelAndView mv) {
+		mv.addObject("courseid", courseid);
+		mv.setViewName("UI/teacher/addStudent.jsp");
+		return mv;
+	}
+	
+	/**
+	 * 为课程添加学生
+	 * @param courseid
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping("addstudent")
+	public ModelAndView addStudent(String courseid,String strdentStr,ModelAndView mv) {
+		String [] listStrdent=strdentStr.split(",");
+		System.out.println("课程：【"+courseid+"】。");
+		for (String string : listStrdent) {
+			System.out.println("学生：【"+string+"】。");
+		}
+		int result=teacherServiceImpl.insGrade(courseid, listStrdent);
+		if(result==listStrdent.length) {
+			mv.addObject("msg", "添加成功");
+		}else {
+			mv.addObject("msg", "添加失败");
+		}
+		mv.setViewName("managercourse");
+		return mv;
+	}
 	
 	
 }
