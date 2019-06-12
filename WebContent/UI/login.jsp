@@ -20,6 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  padding-top: 140px;
 		  padding-bottom: 40px;
 		  background-color: #eee;
+		  background-image: url('img/bg.png');
+		  background-repeat: no-repeat;
 		}
 		.form-signin {
 		  max-width: 330px;
