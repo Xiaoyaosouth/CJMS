@@ -16,7 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
-	
+		<h4>教师课程管理功能说明：
+		学生选修该教师的课程后，教师需要在这里将学生添加到课程中，才能录入成绩。</h4>
 		<table align="center" class="table table-striped table-bordered">
 			<tr>
 				<td colspan="3">${msg}</td>

@@ -110,10 +110,10 @@ public class AdminServiceImpl implements AdminService {
 		if (tempTeacher != null && tempTeacher.getTeacher_id().equals(teacher.getTeacher_id())) {
 			return "添加失败，已存在相同ID的教师";
 		} else {
-			logger.info("尝试添加教师数据");
+			logger.info("管理员尝试添加教师数据");
 			int result = adminMapper.insertTeacher(teacher);
 			if (result > 0) {
-				return "Added teacher successfully";
+				return "【成功】添加教师成功！";
 			} else {
 				return "error";
 			}
@@ -130,10 +130,10 @@ public class AdminServiceImpl implements AdminService {
 		if (tempTeacher == null) {
 			str = "删除失败，教师不存在";
 		} else {
-			logger.info("尝试删除教师");
+			logger.info("管理员尝试删除教师");
 			int result = adminMapper.deleteTeacherById(teaId);
 			if (result > 0) {
-				str = "Deleted teacher successfully";
+				str = "【成功】删除教师成功！ID:" + teaId;
 			} else {
 				str = "error";
 			}
@@ -154,7 +154,7 @@ public class AdminServiceImpl implements AdminService {
 			logger.info("尝试修改教师数据");
 			int result = adminMapper.updateTeacher(teacher);
 			if (result > 0) {
-				str = "Updated teacher successfully";
+				str = "【成功】修改教师数据成功！ID:" + teacher.getTeacher_id();
 			} else {
 				str = "error";
 			}
@@ -174,11 +174,11 @@ public class AdminServiceImpl implements AdminService {
 			if (newpwd != null && newpwd.equals(admin.getAdmin_password())) {
 				str = "修改密码失败，新密码与旧密码相同";
 			} else {
-				logger.info("尝试修改管理员密码");
+				logger.info("尝试修改管理员（ID:"+admin.getAdmin_id()+"）的密码");
 				admin.setAdmin_password(newpwd);
 				int result = adminMapper.updAdminPwd(admin);
 				if (result > 0) {
-					str = "Updated password successfully";
+					str = "【成功】修改管理员密码成功！";
 				} else {
 					str = "error";
 				}
