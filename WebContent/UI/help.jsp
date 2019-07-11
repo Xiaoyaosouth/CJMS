@@ -15,13 +15,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      <link href="css/admin.css" rel="stylesheet">
 	</head>
 	<body>
-	这是一个帮助页面哦~
 		<table align="center" class="table table-striped table-bordered">
 			<tr align="center">
-				<td>版本：123456</td>
+				<td>团队协作：辉、铠</td>
 			</tr>
 			<tr align="center">
-				<td>初始版：123456</td>
+				<td>数据库设计：辉</td>
+			</tr>
+			<tr align="center">
+				<td>SSM框架搭建：辉</td>
+			</tr>
+			<tr align="center">
+				<td>版本：3.1(2019-07-11 16:24)</td>
 			</tr>
 		</table>
 	</body>
